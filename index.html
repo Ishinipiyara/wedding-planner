@@ -7,276 +7,243 @@
     <style>
         :root {
             --sage-green: #A3B18A;
-            --glass-bg: rgba(20, 30, 20, 0.55);
+            --glass-bg: rgba(20, 30, 20, 0.65);
             --glass-border: rgba(163, 177, 138, 0.3);
-            --glass-highlight: rgba(255, 255, 255, 0.1);
             --text-light: #EAEAEA;
         }
-
-        body {
+        
+        body, html {
+            margin: 0; padding: 0;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             color: var(--text-light);
-            /* Dark overlay gradient + Couple Image */
-            background-image: linear-gradient(rgba(10, 15, 10, 0.8), rgba(10, 15, 10, 0.85)), url('couple_image_1.jpg');
+            background-color: #111;
+            scroll-behavior: smooth;
+        }
+
+        /* Full Screen Hero */
+        .hero-section {
+            height: 100vh;
+            background-image: linear-gradient(rgba(10, 15, 10, 0.4), rgba(10, 15, 10, 0.8)), url('couple_image_1.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .hero-section img.logo {
+            width: 120px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.8));
+        }
+        .hero-section h1 {
+            font-weight: 300;
+            letter-spacing: 6px;
+            color: var(--sage-green);
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        
+        /* Scroll Down Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.9em;
+            letter-spacing: 2px;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        /* Main App Area */
+        .app-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
             min-height: 100vh;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        /* Glass Panel */
         .glass-panel {
             background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 40px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
 
-        .hero {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .hero img.logo {
-            width: 100px;
-            margin-bottom: 15px;
-            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.6));
-        }
-        .hero h1 {
-            font-weight: 300;
-            letter-spacing: 4px;
-            color: var(--sage-green);
-            margin: 0;
-        }
-
-        /* Glassy Tabs */
+        /* Tabs */
         .tabs {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 30px;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px;
         }
         .tab-button {
-            background: var(--glass-highlight);
-            backdrop-filter: blur(4px);
+            background: rgba(255,255,255,0.05);
             border: 1px solid var(--glass-border);
             color: var(--text-light);
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+            padding: 12px 20px; border-radius: 8px; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
         }
         .tab-button:hover, .tab-button.active {
-            background: rgba(163, 177, 138, 0.3);
-            border-color: var(--sage-green);
-            box-shadow: 0 0 10px rgba(163, 177, 138, 0.2);
+            background: rgba(163, 177, 138, 0.3); border-color: var(--sage-green);
         }
 
-        /* Content */
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
+        /* Dashboard Stats */
+        .dash-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
+        }
+        .stat-card {
+            background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
+            padding: 20px; border-radius: 12px; text-align: center;
+        }
+        .stat-card h3 { color: var(--sage-green); margin: 0 0 10px 0; font-size: 2rem;}
+        .stat-card p { margin: 0; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; color: #ccc;}
+
         /* Forms */
         .form-group { margin-bottom: 20px; }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.9em;
-            letter-spacing: 1px;
-            color: #ccc;
-        }
+        label { display: block; margin-bottom: 8px; font-size: 0.9em; color: #ccc; }
         input, select {
-            width: 100%;
-            padding: 12px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--glass-border);
-            color: var(--text-light);
-            border-radius: 6px;
-            box-sizing: border-box;
-            outline: none;
-            transition: 0.3s;
+            width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border); color: var(--text-light);
+            border-radius: 6px; box-sizing: border-box; outline: none;
         }
-        input:focus, select:focus {
-            border-color: var(--sage-green);
-            background: rgba(0, 0, 0, 0.5);
-        }
+        input:focus, select:focus { border-color: var(--sage-green); }
         
-        /* Glassy Submit Button */
         button.submit-btn {
-            width: 100%;
-            background: rgba(163, 177, 138, 0.2);
-            border: 1px solid var(--sage-green);
-            color: var(--text-light);
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            backdrop-filter: blur(4px);
-            margin-top: 10px;
+            width: 100%; background: rgba(163, 177, 138, 0.2); border: 1px solid var(--sage-green);
+            color: var(--text-light); padding: 15px; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s;
         }
-        button.submit-btn:hover {
-            background: var(--sage-green);
-            color: #111;
-            font-weight: bold;
-        }
+        button.submit-btn:hover { background: var(--sage-green); color: #111; font-weight: bold; }
 
-        /* Display Lists */
-        .display-list {
-            margin-top: 40px;
-            border-top: 1px solid var(--glass-border);
-            padding-top: 20px;
-        }
+        /* Lists */
         .list-item {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: rgba(0, 0, 0, 0.2); border: 1px solid var(--glass-border);
+            padding: 15px; border-radius: 8px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center;
         }
-        .list-item-details h4 { margin: 0 0 5px 0; color: var(--sage-green); }
-        .list-item-details p { margin: 0; font-size: 0.9em; color: #bbb; }
-        
-        button.edit-btn {
-            background: transparent;
-            border: 1px solid var(--sage-green);
-            color: var(--sage-green);
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button.edit-btn:hover {
-            background: var(--sage-green);
-            color: #111;
-        }
-
-        /* Hidden ID fields for editing */
+        .list-item h4 { margin: 0 0 5px 0; color: var(--sage-green); }
+        .list-item p { margin: 0; font-size: 0.9em; color: #bbb; }
+        .edit-btn { background: transparent; border: 1px solid var(--sage-green); color: var(--sage-green); padding: 6px 12px; border-radius: 4px; cursor: pointer; }
         input[type="hidden"] { display: none; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="glass-panel">
-        
-        <div class="hero">
-            <img src="gold_logo.png" alt="I and I Logo" class="logo" onerror="this.style.display='none'">
-            <h1>ISHINI & ISURU</h1>
-        </div>
-
-        <div class="tabs">
-            <button class="tab-button active" onclick="openTab('budget')">Budget</button>
-            <button class="tab-button" onclick="openTab('guests')">Guest List</button>
-            <button class="tab-button" onclick="openTab('seating')">Seating</button>
-            <button class="tab-button" onclick="openTab('vendors')">Vendors</button>
-        </div>
-
-        <!-- Budget Tab -->
-        <div id="budget" class="tab-content active">
-            <input type="hidden" id="budgetId">
-            <div class="form-group">
-                <label>Category</label>
-                <select id="budgetCategory">
-                    <option value="Decorations">Decorations</option>
-                    <option value="Photography">Photography</option>
-                    <option value="Videography">Videography</option>
-                    <option value="Poruwa">Poruwa</option>
-                    <option value="Dresses">Dresses/Attire</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Specific Item</label>
-                <input type="text" id="budgetItem" placeholder="e.g. Bridal Bouquet">
-            </div>
-            <div class="form-group">
-                <label>Cost (LKR)</label>
-                <input type="number" id="budgetCost" placeholder="0.00">
-            </div>
-            <button class="submit-btn" id="budgetBtn" onclick="submitData('Budget')">Add to Budget</button>
-            
-            <div class="display-list" id="budgetList"></div>
-        </div>
-
-        <!-- Guest List Tab -->
-        <div id="guests" class="tab-content">
-            <input type="hidden" id="guestId">
-            <div class="form-group">
-                <label>Guest Full Name</label>
-                <input type="text" id="guestName" placeholder="e.g. Mr. John Doe">
-            </div>
-            <div class="form-group">
-                <label>Which side?</label>
-                <select id="guestSide">
-                    <option value="Bride">Bride's Side</option>
-                    <option value="Groom">Groom's Side</option>
-                    <option value="Common">Common</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Total Party Size</label>
-                <input type="number" id="guestCount" value="1" min="1">
-            </div>
-            <button class="submit-btn" id="guestBtn" onclick="submitData('Guest')">Add Guest</button>
-            
-            <div class="display-list" id="guestList"></div>
-        </div>
-
-        <!-- Seating Tab -->
-        <div id="seating" class="tab-content">
-            <p style="text-align: center; color: #ccc;"><i>Seating arrangements will populate here based on added guests.</i></p>
-        </div>
-
-        <!-- Vendors Tab -->
-        <div id="vendors" class="tab-content">
-            <input type="hidden" id="vendorId">
-            <div class="form-group">
-                <label>Service Type</label>
-                <input type="text" id="vendorService" placeholder="e.g. Catering">
-            </div>
-            <div class="form-group">
-                <label>Vendor Name</label>
-                <input type="text" id="vendorName" placeholder="Company Name">
-            </div>
-            <div class="form-group">
-                <label>Total Cost (LKR)</label>
-                <input type="number" id="vendorTotal" placeholder="0.00">
-            </div>
-            <div class="form-group">
-                <label>Amount Paid (LKR)</label>
-                <input type="number" id="vendorPaid" placeholder="0.00">
-            </div>
-            <button class="submit-btn" id="vendorBtn" onclick="submitData('Vendor')">Add Vendor</button>
-            
-            <div class="display-list" id="vendorList"></div>
-        </div>
-
+    <!-- Image First Hero Section -->
+    <div class="hero-section">
+        <img src="gold_logo.png" alt="I and I Logo" class="logo" onerror="this.style.display='none'">
+        <h1>ISHINI & ISURU</h1>
+        <a href="#planner" class="scroll-down">▼ SCROLL TO ENTER ▼</a>
     </div>
-</div>
+
+    <!-- Main App -->
+    <div id="planner" class="app-container">
+        <div class="glass-panel">
+            <div class="tabs">
+                <button class="tab-button active" onclick="openTab('dashboard')">Dashboard</button>
+                <button class="tab-button" onclick="openTab('budget')">Budget</button>
+                <button class="tab-button" onclick="openTab('guests')">Guests</button>
+                <button class="tab-button" onclick="openTab('vendors')">Vendors</button>
+                <button class="tab-button" onclick="openTab('seating')">Seating</button>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <h2 style="text-align:center; color: var(--sage-green); margin-bottom: 30px;">Overview</h2>
+                <div class="dash-grid">
+                    <div class="stat-card">
+                        <h3 id="dashGuests">0</h3>
+                        <p>Total Guests</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="dashBudget">0</h3>
+                        <p>Budget Allocated (LKR)</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="dashPaid">0</h3>
+                        <p>Paid to Vendors (LKR)</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 30px; font-size: 0.9em; color: #888;" id="syncStatus">Syncing with Google Sheets...</p>
+            </div>
+
+            <!-- Budget Tab -->
+            <div id="budget" class="tab-content">
+                <input type="hidden" id="budgetId">
+                <div class="form-group"><label>Category</label>
+                    <select id="budgetCategory">
+                        <option>Decorations</option><option>Photography</option><option>Videography</option>
+                        <option>Poruwa</option><option>Dresses</option><option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Specific Item</label><input type="text" id="budgetItem"></div>
+                <div class="form-group"><label>Cost (LKR)</label><input type="number" id="budgetCost"></div>
+                <button class="submit-btn" id="budgetBtn" onclick="submitData('Budget')">Add to Budget</button>
+                <div id="budgetList"></div>
+            </div>
+
+            <!-- Guest List Tab -->
+            <div id="guests" class="tab-content">
+                <input type="hidden" id="guestId">
+                <div class="form-group"><label>Guest Full Name</label><input type="text" id="guestName"></div>
+                <div class="form-group"><label>Which side?</label>
+                    <select id="guestSide"><option>Bride</option><option>Groom</option><option>Common</option></select>
+                </div>
+                <div class="form-group"><label>Total Party Size</label><input type="number" id="guestCount" value="1" min="1"></div>
+                <button class="submit-btn" id="guestBtn" onclick="submitData('Guests')">Add Guest</button>
+                <div id="guestsList"></div>
+            </div>
+
+            <!-- Vendors Tab -->
+            <div id="vendors" class="tab-content">
+                <input type="hidden" id="vendorId">
+                <div class="form-group"><label>Service Type</label><input type="text" id="vendorService"></div>
+                <div class="form-group"><label>Vendor Name</label><input type="text" id="vendorName"></div>
+                <div class="form-group"><label>Total Cost (LKR)</label><input type="number" id="vendorTotal"></div>
+                <div class="form-group"><label>Amount Paid (LKR)</label><input type="number" id="vendorPaid"></div>
+                <button class="submit-btn" id="vendorBtn" onclick="submitData('Vendors')">Add Vendor</button>
+                <div id="vendorsList"></div>
+            </div>
+
+            <!-- Seating Tab -->
+            <div id="seating" class="tab-content">
+                <p style="text-align: center; color: #ccc;"><i>Seating drag-and-drop mapping goes here.</i></p>
+            </div>
+
+        </div>
+    </div>
 
 <script>
-    // Replace with your Web App URL
-    const WEB_APP_URL = 'YOUR_WEB_APP_URL_HERE';
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbznMEKD4UuEpO0lVQ18tREj0FF_coIN6AC6QcQArPSNnGfxScCHbB5nuUQCsna0JcYG/exec';
+    let appData = { Budget: [], Guests: [], Vendors: [] };
 
-    // Local state to display items on screen immediately
-    let appData = { Budget: [], Guest: [], Vendor: [] };
+    // Fetch data on load
+    window.onload = async function() {
+        try {
+            const res = await fetch(WEB_APP_URL);
+            const json = await res.json();
+            if(json.status === 'Success') {
+                // Map Google Sheet rows back to our local data format
+                appData.Budget = json.data.Budget.map(r => ({ id: r[0], raw: { category: r[2], item: r[3], cost: r[4] }, title: r[3], desc: `${r[2]} | LKR ${r[4]}` }));
+                appData.Guests = json.data.Guests.map(r => ({ id: r[0], raw: { name: r[2], side: r[3], partySize: r[4] }, title: r[2], desc: `${r[3]}'s Side | Party of ${r[4]}` }));
+                appData.Vendors = json.data.Vendors.map(r => ({ id: r[0], raw: { service: r[2], vendorName: r[3], amountPaid: r[4], totalCost: r[5] }, title: r[3], desc: `${r[2]} | Total: LKR ${r[5]} | Paid: LKR ${r[4]}` }));
+                
+                renderList('Budget'); renderList('Guests'); renderList('Vendors');
+                updateDashboard();
+                document.getElementById('syncStatus').innerText = "Data synced successfully ✓";
+            }
+        } catch (e) {
+            document.getElementById('syncStatus').innerText = "Working offline. Could not sync with Sheets.";
+        }
+    };
 
     function openTab(tabName) {
         document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
@@ -285,109 +252,87 @@
         event.currentTarget.classList.add("active");
     }
 
-    async function submitData(type) {
-        const btn = document.getElementById(type.toLowerCase() + 'Btn');
-        const idField = document.getElementById(type.toLowerCase() + 'Id');
-        const isEditing = idField.value !== "";
+    function updateDashboard() {
+        let totalGuests = appData.Guests.reduce((sum, g) => sum + Number(g.raw.partySize || 0), 0);
+        let totalBudget = appData.Budget.reduce((sum, b) => sum + Number(b.raw.cost || 0), 0);
+        let totalPaid = appData.Vendors.reduce((sum, v) => sum + Number(v.raw.amountPaid || 0), 0);
         
-        let payload = { 
-            action: (isEditing ? 'edit' : 'add') + type,
-            id: idField.value 
-        };
+        document.getElementById('dashGuests').innerText = totalGuests;
+        document.getElementById('dashBudget').innerText = totalBudget.toLocaleString();
+        document.getElementById('dashPaid').innerText = totalPaid.toLocaleString();
+    }
+
+    async function submitData(type) {
+        const btn = document.getElementById(type.toLowerCase() === 'guests' ? 'guestBtn' : type.toLowerCase().replace('s','') + 'Btn');
+        const idField = document.getElementById(type.toLowerCase() === 'guests' ? 'guestId' : type.toLowerCase().replace('s','') + 'Id');
+        
+        let payload = { type: type, id: idField.value };
         let localItem = { id: payload.id || Date.now().toString() };
 
-        // Gather data based on active tab
         if(type === 'Budget') {
             payload.category = document.getElementById('budgetCategory').value;
             payload.item = document.getElementById('budgetItem').value;
             payload.cost = document.getElementById('budgetCost').value;
-            
-            localItem.title = payload.item;
-            localItem.desc = `${payload.category} | LKR ${payload.cost}`;
-            localItem.raw = payload;
-        } 
-        else if(type === 'Guest') {
+            localItem.title = payload.item; localItem.desc = `${payload.category} | LKR ${payload.cost}`;
+        } else if(type === 'Guests') {
             payload.name = document.getElementById('guestName').value;
             payload.side = document.getElementById('guestSide').value;
             payload.partySize = document.getElementById('guestCount').value;
-
-            localItem.title = payload.name;
-            localItem.desc = `${payload.side}'s Side | Party of ${payload.partySize}`;
-            localItem.raw = payload;
-        }
-        else if(type === 'Vendor') {
+            localItem.title = payload.name; localItem.desc = `${payload.side}'s Side | Party of ${payload.partySize}`;
+        } else if(type === 'Vendors') {
             payload.service = document.getElementById('vendorService').value;
             payload.vendorName = document.getElementById('vendorName').value;
             payload.totalCost = document.getElementById('vendorTotal').value;
             payload.amountPaid = document.getElementById('vendorPaid').value;
-
-            localItem.title = payload.vendorName;
-            localItem.desc = `${payload.service} | Total: LKR ${payload.totalCost} | Paid: LKR ${payload.amountPaid}`;
-            localItem.raw = payload;
+            localItem.title = payload.vendorName; localItem.desc = `${payload.service} | Total: LKR ${payload.totalCost} | Paid: LKR ${payload.amountPaid}`;
         }
+        
+        localItem.raw = payload;
 
-        // Update UI locally first for snappy feel
-        if (isEditing) {
+        if (idField.value) {
             const index = appData[type].findIndex(i => i.id === payload.id);
             if(index > -1) appData[type][index] = localItem;
         } else {
-            payload.id = localItem.id; // ensure ID is passed to backend for new items
+            payload.id = localItem.id;
             appData[type].push(localItem);
         }
         
-        renderList(type);
-        resetForm(type);
+        renderList(type); updateDashboard(); resetForm(type);
 
-        // Send to backend
         try {
-            btn.innerText = "Saving to Sheets...";
-            const response = await fetch(WEB_APP_URL, {
-                method: 'POST',
-                body: JSON.stringify(payload),
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-            });
-            await response.json();
-            btn.innerText = `Add ${type}`;
-        } catch (error) {
-            console.error(error);
-            btn.innerText = `Add ${type} (Offline/Error)`;
-        }
+            btn.innerText = "Saving...";
+            await fetch(WEB_APP_URL, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'text/plain;charset=utf-8' } });
+            btn.innerText = `Saved ✓`;
+            setTimeout(() => btn.innerText = `Add`, 2000);
+        } catch (error) { btn.innerText = `Error Saving`; }
     }
 
     function renderList(type) {
         const listDiv = document.getElementById(type.toLowerCase() + 'List');
         listDiv.innerHTML = '';
-        
         appData[type].forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'list-item';
-            div.innerHTML = `
-                <div class="list-item-details">
-                    <h4>${item.title}</h4>
-                    <p>${item.desc}</p>
-                </div>
-                <button class="edit-btn" onclick='editItem("${type}", ${JSON.stringify(item)})'>Edit</button>
-            `;
-            listDiv.appendChild(div);
+            listDiv.innerHTML += `
+                <div class="list-item">
+                    <div><h4>${item.title}</h4><p>${item.desc}</p></div>
+                    <button class="edit-btn" onclick='editItem("${type}", ${JSON.stringify(item)})'>Edit</button>
+                </div>`;
         });
     }
 
     function editItem(type, item) {
-        // Scroll to top of panel
-        document.querySelector('.glass-panel').scrollIntoView({ behavior: 'smooth' });
-        
-        document.getElementById(type.toLowerCase() + 'Id').value = item.id;
-        document.getElementById(type.toLowerCase() + 'Btn').innerText = `Update ${type}`;
+        const prefix = type.toLowerCase() === 'guests' ? 'guest' : type.toLowerCase().replace('s','');
+        document.getElementById(prefix + 'Id').value = item.id;
+        document.getElementById(prefix + 'Btn').innerText = `Update`;
 
         if(type === 'Budget') {
             document.getElementById('budgetCategory').value = item.raw.category;
             document.getElementById('budgetItem').value = item.raw.item;
             document.getElementById('budgetCost').value = item.raw.cost;
-        } else if(type === 'Guest') {
+        } else if(type === 'Guests') {
             document.getElementById('guestName').value = item.raw.name;
             document.getElementById('guestSide').value = item.raw.side;
             document.getElementById('guestCount').value = item.raw.partySize;
-        } else if(type === 'Vendor') {
+        } else if(type === 'Vendors') {
             document.getElementById('vendorService').value = item.raw.service;
             document.getElementById('vendorName').value = item.raw.vendorName;
             document.getElementById('vendorTotal').value = item.raw.totalCost;
@@ -396,22 +341,11 @@
     }
 
     function resetForm(type) {
-        const prefix = type.toLowerCase();
+        const prefix = type.toLowerCase() === 'guests' ? 'guest' : type.toLowerCase().replace('s','');
         document.getElementById(prefix + 'Id').value = "";
-        document.getElementById(prefix + 'Btn').innerText = `Add ${type}`;
-        
-        if(type === 'Budget') {
-            document.getElementById('budgetItem').value = "";
-            document.getElementById('budgetCost').value = "";
-        } else if(type === 'Guest') {
-            document.getElementById('guestName').value = "";
-            document.getElementById('guestCount').value = "1";
-        } else if(type === 'Vendor') {
-            document.getElementById('vendorService').value = "";
-            document.getElementById('vendorName').value = "";
-            document.getElementById('vendorTotal').value = "";
-            document.getElementById('vendorPaid').value = "";
-        }
+        if(type === 'Budget') { document.getElementById('budgetItem').value = ""; document.getElementById('budgetCost').value = ""; }
+        if(type === 'Guests') { document.getElementById('guestName').value = ""; document.getElementById('guestCount').value = "1"; }
+        if(type === 'Vendors') { ['vendorService','vendorName','vendorTotal','vendorPaid'].forEach(id => document.getElementById(id).value = ""); }
     }
 </script>
 </body>
