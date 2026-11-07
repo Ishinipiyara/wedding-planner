@@ -20,40 +20,19 @@
             scroll-behavior: smooth;
         }
 
-        /* Full Screen Hero */
+        /* Hero */
         .hero-section {
             height: 100vh;
             background-image: linear-gradient(rgba(10, 15, 10, 0.4), rgba(10, 15, 10, 0.8)), url('couple_image_1.jpg');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
-        .hero-section img.logo {
-            width: 120px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.8));
-        }
-        .hero-section h1 {
-            font-weight: 300;
-            letter-spacing: 6px;
-            color: var(--sage-green);
-            font-size: 2.5rem;
-            margin: 0;
-        }
+        .hero-section img.logo { width: 120px; margin-bottom: 20px; filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.8)); }
+        .hero-section h1 { font-weight: 300; letter-spacing: 6px; color: var(--sage-green); font-size: 2.5rem; margin: 0; }
         
-        /* Scroll Down Indicator */
         .scroll-down {
-            position: absolute;
-            bottom: 40px;
-            text-decoration: none;
-            color: var(--text-light);
-            font-size: 0.9em;
-            letter-spacing: 2px;
-            animation: bounce 2s infinite;
+            position: absolute; bottom: 40px; text-decoration: none; color: var(--text-light);
+            font-size: 0.9em; letter-spacing: 2px; animation: bounce 2s infinite;
         }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
@@ -61,63 +40,37 @@
             60% { transform: translateY(-7px); }
         }
 
-        /* Main App Area */
-        .app-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            min-height: 100vh;
-        }
-
+        /* Container & Panels */
+        .app-container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; min-height: 100vh; }
         .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 16px; padding: 40px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
 
         /* Tabs */
-        .tabs {
-            display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px;
-        }
+        .tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
         .tab-button {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            color: var(--text-light);
-            padding: 12px 20px; border-radius: 8px; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+            background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: var(--text-light);
+            padding: 12px 20px; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
         }
-        .tab-button:hover, .tab-button.active {
-            background: rgba(163, 177, 138, 0.3); border-color: var(--sage-green);
-        }
-
+        .tab-button:hover, .tab-button.active { background: rgba(163, 177, 138, 0.3); border-color: var(--sage-green); }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* Dashboard Stats */
-        .dash-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
-        }
-        .stat-card {
-            background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
-            padding: 20px; border-radius: 12px; text-align: center;
-        }
+        /* Dashboard */
+        .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .stat-card { background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); padding: 20px; border-radius: 12px; text-align: center; }
         .stat-card h3 { color: var(--sage-green); margin: 0 0 10px 0; font-size: 2rem;}
         .stat-card p { margin: 0; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; color: #ccc;}
 
         /* Forms */
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-size: 0.9em; color: #ccc; }
-        input, select {
-            width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--glass-border); color: var(--text-light);
-            border-radius: 6px; box-sizing: border-box; outline: none;
+        input, select, textarea {
+            width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--glass-border);
+            color: var(--text-light); border-radius: 6px; box-sizing: border-box; outline: none; font-family: inherit;
         }
-        input:focus, select:focus { border-color: var(--sage-green); }
-        
+        input:focus, select:focus, textarea:focus { border-color: var(--sage-green); }
         button.submit-btn {
             width: 100%; background: rgba(163, 177, 138, 0.2); border: 1px solid var(--sage-green);
             color: var(--text-light); padding: 15px; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s;
@@ -126,25 +79,48 @@
 
         /* Lists */
         .list-item {
-            background: rgba(0, 0, 0, 0.2); border: 1px solid var(--glass-border);
-            padding: 15px; border-radius: 8px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0, 0, 0, 0.2); border: 1px solid var(--glass-border); padding: 15px; border-radius: 8px; 
+            margin-top: 10px; display: flex; justify-content: space-between; align-items: center;
         }
         .list-item h4 { margin: 0 0 5px 0; color: var(--sage-green); }
         .list-item p { margin: 0; font-size: 0.9em; color: #bbb; }
         .edit-btn { background: transparent; border: 1px solid var(--sage-green); color: var(--sage-green); padding: 6px 12px; border-radius: 4px; cursor: pointer; }
+        .edit-btn:hover { background: var(--sage-green); color: #111; }
         input[type="hidden"] { display: none; }
+
+        /* Seating Drag & Drop */
+        .seating-dashboard { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+        .unassigned-zone {
+            flex: 1; min-width: 250px; background: rgba(0,0,0,0.4); border: 1px dashed var(--sage-green); 
+            border-radius: 8px; padding: 15px; min-height: 300px;
+        }
+        .tables-zone { flex: 2; display: flex; gap: 15px; flex-wrap: wrap; }
+        .wedding-table {
+            width: 200px; min-height: 250px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); 
+            border-radius: 12px; padding: 20px; display: flex; flex-direction: column; align-items: center;
+        }
+        .wedding-table h4 { margin: 0 0 10px 0; color: var(--sage-green); border-bottom: 1px solid var(--glass-border); padding-bottom: 5px; width: 100%; text-align: center; }
+        .drop-area { flex-grow: 1; width: 100%; min-height: 150px; }
+        .guest-card {
+            background: rgba(163, 177, 138, 0.2); border: 1px solid var(--sage-green); color: var(--text-light); 
+            padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; cursor: grab; font-size: 0.9em; text-align: center;
+        }
+        .guest-card:active { cursor: grabbing; opacity: 0.7; }
+        .guest-card span { display: block; font-size: 0.8em; color: #ccc; }
+        
+        /* Bulk Add details */
+        details { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px solid var(--glass-border); margin-bottom: 20px; }
+        summary { cursor: pointer; color: var(--sage-green); font-weight: bold; outline: none; }
     </style>
 </head>
 <body>
 
-    <!-- Image First Hero Section -->
     <div class="hero-section">
         <img src="gold_logo.png" alt="I and I Logo" class="logo" onerror="this.style.display='none'">
         <h1>ISHINI & ISURU</h1>
         <a href="#planner" class="scroll-down">▼ SCROLL TO ENTER ▼</a>
     </div>
 
-    <!-- Main App -->
     <div id="planner" class="app-container">
         <div class="glass-panel">
             <div class="tabs">
@@ -155,34 +131,22 @@
                 <button class="tab-button" onclick="openTab('seating')">Seating</button>
             </div>
 
-            <!-- Dashboard Tab -->
+            <!-- Dashboard -->
             <div id="dashboard" class="tab-content active">
                 <h2 style="text-align:center; color: var(--sage-green); margin-bottom: 30px;">Overview</h2>
                 <div class="dash-grid">
-                    <div class="stat-card">
-                        <h3 id="dashGuests">0</h3>
-                        <p>Total Guests</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 id="dashBudget">0</h3>
-                        <p>Budget Allocated (LKR)</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 id="dashPaid">0</h3>
-                        <p>Paid to Vendors (LKR)</p>
-                    </div>
+                    <div class="stat-card"><h3 id="dashGuests">0</h3><p>Total Guests</p></div>
+                    <div class="stat-card"><h3 id="dashBudget">0</h3><p>Budget (LKR)</p></div>
+                    <div class="stat-card"><h3 id="dashPaid">0</h3><p>Paid (LKR)</p></div>
                 </div>
                 <p style="text-align: center; margin-top: 30px; font-size: 0.9em; color: #888;" id="syncStatus">Syncing with Google Sheets...</p>
             </div>
 
-            <!-- Budget Tab -->
+            <!-- Budget -->
             <div id="budget" class="tab-content">
                 <input type="hidden" id="budgetId">
                 <div class="form-group"><label>Category</label>
-                    <select id="budgetCategory">
-                        <option>Decorations</option><option>Photography</option><option>Videography</option>
-                        <option>Poruwa</option><option>Dresses</option><option>Other</option>
-                    </select>
+                    <select id="budgetCategory"><option>Decorations</option><option>Photography</option><option>Videography</option><option>Poruwa</option><option>Dresses</option><option>Other</option></select>
                 </div>
                 <div class="form-group"><label>Specific Item</label><input type="text" id="budgetItem"></div>
                 <div class="form-group"><label>Cost (LKR)</label><input type="number" id="budgetCost"></div>
@@ -190,8 +154,23 @@
                 <div id="budgetList"></div>
             </div>
 
-            <!-- Guest List Tab -->
+            <!-- Guests -->
             <div id="guests" class="tab-content">
+                
+                <!-- Bulk Add Feature -->
+                <details>
+                    <summary>+ Bulk Add Guests (Paste a list)</summary>
+                    <p style="font-size: 0.8em; color: #aaa; margin-top: 10px;">
+                        Format: <code>Name, Side, PartySize</code> (e.g. Uncle John, Bride, 2)<br>
+                        <i>Or just paste a list of names and it will default to Common side, Party of 1.</i>
+                    </p>
+                    <textarea id="bulkGuestList" rows="5" placeholder="John Doe, Groom, 2&#10;Jane Smith, Bride, 1&#10;Aunt Mary"></textarea>
+                    <button class="submit-btn" id="bulkGuestBtn" onclick="submitBulkGuests()" style="margin-top: 10px; padding: 10px;">Upload List</button>
+                </details>
+
+                <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 30px 0;">
+
+                <h3 style="color: var(--sage-green);">Add Single Guest</h3>
                 <input type="hidden" id="guestId">
                 <div class="form-group"><label>Guest Full Name</label><input type="text" id="guestName"></div>
                 <div class="form-group"><label>Which side?</label>
@@ -202,7 +181,7 @@
                 <div id="guestsList"></div>
             </div>
 
-            <!-- Vendors Tab -->
+            <!-- Vendors -->
             <div id="vendors" class="tab-content">
                 <input type="hidden" id="vendorId">
                 <div class="form-group"><label>Service Type</label><input type="text" id="vendorService"></div>
@@ -213,31 +192,52 @@
                 <div id="vendorsList"></div>
             </div>
 
-            <!-- Seating Tab -->
+            <!-- Seating -->
             <div id="seating" class="tab-content">
-                <p style="text-align: center; color: #ccc;"><i>Seating drag-and-drop mapping goes here.</i></p>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2 style="color: var(--sage-green); margin: 0;">Table Mapping</h2>
+                    <button class="edit-btn" onclick="addTable()">+ Add Table</button>
+                </div>
+                <p style="font-size: 0.85em; color: #aaa;">Drag a guest from the Unassigned zone and drop them onto a table. It saves automatically.</p>
+                
+                <div class="seating-dashboard">
+                    <div class="unassigned-zone">
+                        <h4 style="margin-top:0; color: var(--text-light); text-align: center;">Unassigned</h4>
+                        <div id="Unassigned" class="drop-area" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+                    </div>
+                    <div class="tables-zone" id="tablesContainer">
+                        <div class="wedding-table">
+                            <h4>Table 1</h4>
+                            <div id="Table_1" class="drop-area" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
     </div>
 
 <script>
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbznMEKD4UuEpO0lVQ18tREj0FF_coIN6AC6QcQArPSNnGfxScCHbB5nuUQCsna0JcYG/exec';
+    // --- SETUP ---
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbznMEKD4UuEpO0lVQ18tREj0FF_coIN6AC6QcQArPSNnGfxScCHbB5nuUQCsna0JcYG/exec'; // <--- PASTE DEPLOYED URL HERE
     let appData = { Budget: [], Guests: [], Vendors: [] };
+    let tableCount = 1;
 
-    // Fetch data on load
+    // --- FETCH DATA ON LOAD ---
     window.onload = async function() {
         try {
             const res = await fetch(WEB_APP_URL);
             const json = await res.json();
             if(json.status === 'Success') {
-                // Map Google Sheet rows back to our local data format
                 appData.Budget = json.data.Budget.map(r => ({ id: r[0], raw: { category: r[2], item: r[3], cost: r[4] }, title: r[3], desc: `${r[2]} | LKR ${r[4]}` }));
-                appData.Guests = json.data.Guests.map(r => ({ id: r[0], raw: { name: r[2], side: r[3], partySize: r[4] }, title: r[2], desc: `${r[3]}'s Side | Party of ${r[4]}` }));
+                appData.Guests = json.data.Guests.map(r => ({ id: r[0], raw: { name: r[2], side: r[3], partySize: r[4], table: r[5] }, title: r[2], desc: `${r[3]}'s Side | Party of ${r[4]}` }));
                 appData.Vendors = json.data.Vendors.map(r => ({ id: r[0], raw: { service: r[2], vendorName: r[3], amountPaid: r[4], totalCost: r[5] }, title: r[3], desc: `${r[2]} | Total: LKR ${r[5]} | Paid: LKR ${r[4]}` }));
                 
-                renderList('Budget'); renderList('Guests'); renderList('Vendors');
-                updateDashboard();
+                // Initialize required tables based on saved guest data
+                const highestTable = Math.max(...appData.Guests.map(g => parseInt(g.raw.table?.replace('Table_','')) || 1));
+                while(tableCount < highestTable) { addTable(); }
+
+                updateAllViews();
                 document.getElementById('syncStatus').innerText = "Data synced successfully ✓";
             }
         } catch (e) {
@@ -252,6 +252,14 @@
         event.currentTarget.classList.add("active");
     }
 
+    function updateAllViews() {
+        renderList('Budget'); 
+        renderList('Guests'); 
+        renderList('Vendors');
+        updateDashboard();
+        renderSeating();
+    }
+
     function updateDashboard() {
         let totalGuests = appData.Guests.reduce((sum, g) => sum + Number(g.raw.partySize || 0), 0);
         let totalBudget = appData.Budget.reduce((sum, b) => sum + Number(b.raw.cost || 0), 0);
@@ -262,6 +270,64 @@
         document.getElementById('dashPaid').innerText = totalPaid.toLocaleString();
     }
 
+    // --- BULK ADD GUESTS ---
+    async function submitBulkGuests() {
+        const textArea = document.getElementById('bulkGuestList');
+        const btn = document.getElementById('bulkGuestBtn');
+        const lines = textArea.value.split('\n').filter(line => line.trim() !== '');
+        
+        if (lines.length === 0) return alert("Please enter at least one guest.");
+
+        let newGuests = [];
+        let timestampPrefix = Date.now();
+
+        lines.forEach((line, index) => {
+            // Split by comma and clean up whitespace
+            let parts = line.split(',').map(s => s.trim());
+            let name = parts[0];
+            let side = parts[1] || 'Common';
+            let size = parseInt(parts[2]) || 1;
+
+            let guestObj = {
+                id: (timestampPrefix + index).toString(),
+                name: name,
+                side: side,
+                partySize: size,
+                table: "Unassigned"
+            };
+            
+            // Add to local UI array
+            appData.Guests.push({
+                id: guestObj.id,
+                raw: guestObj,
+                title: guestObj.name,
+                desc: `${guestObj.side}'s Side | Party of ${guestObj.partySize}`
+            });
+
+            newGuests.push(guestObj);
+        });
+
+        // Update UI immediately
+        textArea.value = "";
+        updateAllViews();
+        document.querySelector('details').removeAttribute('open'); // Close the details tab
+
+        // Send to backend
+        try {
+            btn.innerText = "Uploading...";
+            await fetch(WEB_APP_URL, {
+                method: 'POST',
+                body: JSON.stringify({ action: 'bulkAddGuests', guests: newGuests }),
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+            });
+            btn.innerText = `Upload List`;
+        } catch (error) {
+            alert("Error saving bulk list. Check connection.");
+            btn.innerText = `Upload List`;
+        }
+    }
+
+    // --- SINGLE ADD/EDIT ---
     async function submitData(type) {
         const btn = document.getElementById(type.toLowerCase() === 'guests' ? 'guestBtn' : type.toLowerCase().replace('s','') + 'Btn');
         const idField = document.getElementById(type.toLowerCase() === 'guests' ? 'guestId' : type.toLowerCase().replace('s','') + 'Id');
@@ -278,6 +344,9 @@
             payload.name = document.getElementById('guestName').value;
             payload.side = document.getElementById('guestSide').value;
             payload.partySize = document.getElementById('guestCount').value;
+            // Preserve existing table if editing, else Unassigned
+            const existingGuest = appData.Guests.find(g => g.id === payload.id);
+            payload.table = existingGuest ? existingGuest.raw.table : "Unassigned";
             localItem.title = payload.name; localItem.desc = `${payload.side}'s Side | Party of ${payload.partySize}`;
         } else if(type === 'Vendors') {
             payload.service = document.getElementById('vendorService').value;
@@ -297,7 +366,8 @@
             appData[type].push(localItem);
         }
         
-        renderList(type); updateDashboard(); resetForm(type);
+        updateAllViews(); 
+        resetForm(type);
 
         try {
             btn.innerText = "Saving...";
@@ -309,8 +379,10 @@
 
     function renderList(type) {
         const listDiv = document.getElementById(type.toLowerCase() + 'List');
+        if(!listDiv) return;
         listDiv.innerHTML = '';
-        appData[type].forEach(item => {
+        // Render in reverse so newest is on top
+        [...appData[type]].reverse().forEach(item => {
             listDiv.innerHTML += `
                 <div class="list-item">
                     <div><h4>${item.title}</h4><p>${item.desc}</p></div>
@@ -338,6 +410,7 @@
             document.getElementById('vendorTotal').value = item.raw.totalCost;
             document.getElementById('vendorPaid').value = item.raw.amountPaid;
         }
+        document.querySelector('.glass-panel').scrollIntoView({ behavior: 'smooth' });
     }
 
     function resetForm(type) {
@@ -346,6 +419,73 @@
         if(type === 'Budget') { document.getElementById('budgetItem').value = ""; document.getElementById('budgetCost').value = ""; }
         if(type === 'Guests') { document.getElementById('guestName').value = ""; document.getElementById('guestCount').value = "1"; }
         if(type === 'Vendors') { ['vendorService','vendorName','vendorTotal','vendorPaid'].forEach(id => document.getElementById(id).value = ""); }
+    }
+
+    // --- SEATING DRAG & DROP LOGIC ---
+    function renderSeating() {
+        document.querySelectorAll('.drop-area').forEach(zone => zone.innerHTML = '');
+        
+        appData.Guests.forEach(guest => {
+            const card = document.createElement('div');
+            card.className = 'guest-card';
+            card.draggable = true;
+            card.id = 'guest-' + guest.id;
+            card.ondragstart = drag;
+            card.innerHTML = `${guest.raw.name} <span>(Party of ${guest.raw.partySize})</span>`;
+            
+            let assignedTable = guest.raw.table || 'Unassigned';
+            let targetZone = document.getElementById(assignedTable);
+            
+            if (!targetZone) { targetZone = document.getElementById('Unassigned'); }
+            targetZone.appendChild(card);
+        });
+    }
+
+    function addTable() {
+        tableCount++;
+        const tableId = 'Table_' + tableCount;
+        const tableDiv = document.createElement('div');
+        tableDiv.className = 'wedding-table';
+        tableDiv.innerHTML = `<h4>Table ${tableCount}</h4><div id="${tableId}" class="drop-area" ondragover="allowDrop(event)" ondrop="drop(event)"></div>`;
+        document.getElementById('tablesContainer').appendChild(tableDiv);
+    }
+
+    function allowDrop(event) { event.preventDefault(); }
+    function drag(event) { event.dataTransfer.setData("text", event.target.id); }
+    
+    async function drop(event) {
+        event.preventDefault();
+        const guestCardId = event.dataTransfer.getData("text");
+        const draggedElement = document.getElementById(guestCardId);
+        if(!draggedElement) return;
+
+        let dropZone = event.target;
+        if (!dropZone.classList.contains('drop-area')) {
+            dropZone = dropZone.closest('.wedding-table')?.querySelector('.drop-area');
+        }
+        if(!dropZone) return;
+        
+        // Move element visually
+        dropZone.appendChild(draggedElement);
+
+        // Update local data
+        const guestRealId = guestCardId.replace('guest-', '');
+        const guestIndex = appData.Guests.findIndex(g => g.id == guestRealId);
+        
+        if (guestIndex > -1) {
+            appData.Guests[guestIndex].raw.table = dropZone.id;
+            
+            // Send stealth background update to Google Sheets
+            try {
+                await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'updateSeating', id: guestRealId, table: dropZone.id }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                });
+            } catch(e) {
+                console.error("Failed to sync seating update to sheets.", e);
+            }
+        }
     }
 </script>
 </body>
