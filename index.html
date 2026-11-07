@@ -107,10 +107,6 @@
         }
         .guest-card:active { cursor: grabbing; opacity: 0.7; }
         .guest-card span { display: block; font-size: 0.8em; color: #ccc; }
-        
-        /* Bulk Add details */
-        details { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px solid var(--glass-border); margin-bottom: 20px; }
-        summary { cursor: pointer; color: var(--sage-green); font-weight: bold; outline: none; }
     </style>
 </head>
 <body>
@@ -156,21 +152,6 @@
 
             <!-- Guests -->
             <div id="guests" class="tab-content">
-                
-                <!-- Bulk Add Feature -->
-                <details>
-                    <summary>+ Bulk Add Guests (Paste a list)</summary>
-                    <p style="font-size: 0.8em; color: #aaa; margin-top: 10px;">
-                        Format: <code>Name, Side, PartySize</code> (e.g. Uncle John, Bride, 2)<br>
-                        <i>Or just paste a list of names and it will default to Common side, Party of 1.</i>
-                    </p>
-                    <textarea id="bulkGuestList" rows="5" placeholder="John Doe, Groom, 2&#10;Jane Smith, Bride, 1&#10;Aunt Mary"></textarea>
-                    <button class="submit-btn" id="bulkGuestBtn" onclick="submitBulkGuests()" style="margin-top: 10px; padding: 10px;">Upload List</button>
-                </details>
-
-                <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 30px 0;">
-
-                <h3 style="color: var(--sage-green);">Add Single Guest</h3>
                 <input type="hidden" id="guestId">
                 <div class="form-group"><label>Guest Full Name</label><input type="text" id="guestName"></div>
                 <div class="form-group"><label>Which side?</label>
@@ -268,63 +249,6 @@
         document.getElementById('dashGuests').innerText = totalGuests;
         document.getElementById('dashBudget').innerText = totalBudget.toLocaleString();
         document.getElementById('dashPaid').innerText = totalPaid.toLocaleString();
-    }
-
-    // --- BULK ADD GUESTS ---
-    async function submitBulkGuests() {
-        const textArea = document.getElementById('bulkGuestList');
-        const btn = document.getElementById('bulkGuestBtn');
-        const lines = textArea.value.split('\n').filter(line => line.trim() !== '');
-        
-        if (lines.length === 0) return alert("Please enter at least one guest.");
-
-        let newGuests = [];
-        let timestampPrefix = Date.now();
-
-        lines.forEach((line, index) => {
-            // Split by comma and clean up whitespace
-            let parts = line.split(',').map(s => s.trim());
-            let name = parts[0];
-            let side = parts[1] || 'Common';
-            let size = parseInt(parts[2]) || 1;
-
-            let guestObj = {
-                id: (timestampPrefix + index).toString(),
-                name: name,
-                side: side,
-                partySize: size,
-                table: "Unassigned"
-            };
-            
-            // Add to local UI array
-            appData.Guests.push({
-                id: guestObj.id,
-                raw: guestObj,
-                title: guestObj.name,
-                desc: `${guestObj.side}'s Side | Party of ${guestObj.partySize}`
-            });
-
-            newGuests.push(guestObj);
-        });
-
-        // Update UI immediately
-        textArea.value = "";
-        updateAllViews();
-        document.querySelector('details').removeAttribute('open'); // Close the details tab
-
-        // Send to backend
-        try {
-            btn.innerText = "Uploading...";
-            await fetch(WEB_APP_URL, {
-                method: 'POST',
-                body: JSON.stringify({ action: 'bulkAddGuests', guests: newGuests }),
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-            });
-            btn.innerText = `Upload List`;
-        } catch (error) {
-            alert("Error saving bulk list. Check connection.");
-            btn.innerText = `Upload List`;
-        }
     }
 
     // --- SINGLE ADD/EDIT ---
