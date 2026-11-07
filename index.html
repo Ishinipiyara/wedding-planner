@@ -7,278 +7,412 @@
     <style>
         :root {
             --sage-green: #A3B18A;
-            --dark-sage: #588157;
-            --off-white: #DAD7CD;
-            --white: #FFFFFF;
-            --text-dark: #3A5A40;
+            --glass-bg: rgba(20, 30, 20, 0.55);
+            --glass-border: rgba(163, 177, 138, 0.3);
+            --glass-highlight: rgba(255, 255, 255, 0.1);
+            --text-light: #EAEAEA;
         }
 
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: var(--white);
-            color: var(--text-dark);
             margin: 0;
             padding: 0;
-            text-align: center;
+            color: var(--text-light);
+            /* Dark overlay gradient + Couple Image */
+            background-image: linear-gradient(rgba(10, 15, 10, 0.8), rgba(10, 15, 10, 0.85)), url('couple_image_1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
         }
 
-        /* Hero Section */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* Glass Panel */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
         .hero {
-            padding: 60px 20px;
-            background-color: var(--off-white);
+            text-align: center;
+            margin-bottom: 30px;
         }
         .hero img.logo {
-            width: 120px;
-            margin-bottom: 20px;
+            width: 100px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.6));
         }
         .hero h1 {
             font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            color: var(--dark-sage);
-        }
-        .image-gallery {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .image-gallery img {
-            width: 300px;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            letter-spacing: 4px;
+            color: var(--sage-green);
+            margin: 0;
         }
 
-        /* Tabs */
+        /* Glassy Tabs */
         .tabs {
             display: flex;
             justify-content: center;
-            background-color: var(--sage-green);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
         }
         .tab-button {
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 16px;
+            background: var(--glass-highlight);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin: 0 20px;
-            cursor: pointer;
-            padding: 10px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
         .tab-button:hover, .tab-button.active {
-            border-bottom: 2px solid var(--white);
-            font-weight: bold;
+            background: rgba(163, 177, 138, 0.3);
+            border-color: var(--sage-green);
+            box-shadow: 0 0 10px rgba(163, 177, 138, 0.2);
         }
 
-        /* Content Sections */
-        .tab-content {
-            display: none;
-            padding: 50px;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: left;
-        }
-        .tab-content.active {
-            display: block;
-        }
+        /* Content */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
         /* Forms */
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .form-group { margin-bottom: 20px; }
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            color: #ccc;
         }
         input, select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid var(--sage-green);
-            border-radius: 4px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            border-radius: 6px;
             box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
         }
+        input:focus, select:focus {
+            border-color: var(--sage-green);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Glassy Submit Button */
         button.submit-btn {
-            background-color: var(--dark-sage);
-            color: var(--white);
-            border: none;
-            padding: 12px 24px;
-            cursor: pointer;
-            border-radius: 4px;
+            width: 100%;
+            background: rgba(163, 177, 138, 0.2);
+            border: 1px solid var(--sage-green);
+            color: var(--text-light);
+            padding: 15px;
+            border-radius: 8px;
             font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(4px);
+            margin-top: 10px;
         }
         button.submit-btn:hover {
-            background-color: var(--sage-green);
+            background: var(--sage-green);
+            color: #111;
+            font-weight: bold;
         }
+
+        /* Display Lists */
+        .display-list {
+            margin-top: 40px;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 20px;
+        }
+        .list-item {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .list-item-details h4 { margin: 0 0 5px 0; color: var(--sage-green); }
+        .list-item-details p { margin: 0; font-size: 0.9em; color: #bbb; }
+        
+        button.edit-btn {
+            background: transparent;
+            border: 1px solid var(--sage-green);
+            color: var(--sage-green);
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button.edit-btn:hover {
+            background: var(--sage-green);
+            color: #111;
+        }
+
+        /* Hidden ID fields for editing */
+        input[type="hidden"] { display: none; }
     </style>
 </head>
 <body>
 
-    <div class="hero">
-        <img src="gold_logo.png" alt="I and I Logo" class="logo" onerror="this.style.display='none'">
-        <h1>ISHINI & ISURU</h1>
-        <div class="image-gallery">
-            <img src="couple_image_1.jpg" alt="Ishini and Isuru 1">
-            <img src="couple_image_2.jpg" alt="Ishini and Isuru 2">
+<div class="container">
+    <div class="glass-panel">
+        
+        <div class="hero">
+            <img src="gold_logo.png" alt="I and I Logo" class="logo" onerror="this.style.display='none'">
+            <h1>ISHINI & ISURU</h1>
         </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('budget')">Budget</button>
+            <button class="tab-button" onclick="openTab('guests')">Guest List</button>
+            <button class="tab-button" onclick="openTab('seating')">Seating</button>
+            <button class="tab-button" onclick="openTab('vendors')">Vendors</button>
+        </div>
+
+        <!-- Budget Tab -->
+        <div id="budget" class="tab-content active">
+            <input type="hidden" id="budgetId">
+            <div class="form-group">
+                <label>Category</label>
+                <select id="budgetCategory">
+                    <option value="Decorations">Decorations</option>
+                    <option value="Photography">Photography</option>
+                    <option value="Videography">Videography</option>
+                    <option value="Poruwa">Poruwa</option>
+                    <option value="Dresses">Dresses/Attire</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Specific Item</label>
+                <input type="text" id="budgetItem" placeholder="e.g. Bridal Bouquet">
+            </div>
+            <div class="form-group">
+                <label>Cost (LKR)</label>
+                <input type="number" id="budgetCost" placeholder="0.00">
+            </div>
+            <button class="submit-btn" id="budgetBtn" onclick="submitData('Budget')">Add to Budget</button>
+            
+            <div class="display-list" id="budgetList"></div>
+        </div>
+
+        <!-- Guest List Tab -->
+        <div id="guests" class="tab-content">
+            <input type="hidden" id="guestId">
+            <div class="form-group">
+                <label>Guest Full Name</label>
+                <input type="text" id="guestName" placeholder="e.g. Mr. John Doe">
+            </div>
+            <div class="form-group">
+                <label>Which side?</label>
+                <select id="guestSide">
+                    <option value="Bride">Bride's Side</option>
+                    <option value="Groom">Groom's Side</option>
+                    <option value="Common">Common</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Total Party Size</label>
+                <input type="number" id="guestCount" value="1" min="1">
+            </div>
+            <button class="submit-btn" id="guestBtn" onclick="submitData('Guest')">Add Guest</button>
+            
+            <div class="display-list" id="guestList"></div>
+        </div>
+
+        <!-- Seating Tab -->
+        <div id="seating" class="tab-content">
+            <p style="text-align: center; color: #ccc;"><i>Seating arrangements will populate here based on added guests.</i></p>
+        </div>
+
+        <!-- Vendors Tab -->
+        <div id="vendors" class="tab-content">
+            <input type="hidden" id="vendorId">
+            <div class="form-group">
+                <label>Service Type</label>
+                <input type="text" id="vendorService" placeholder="e.g. Catering">
+            </div>
+            <div class="form-group">
+                <label>Vendor Name</label>
+                <input type="text" id="vendorName" placeholder="Company Name">
+            </div>
+            <div class="form-group">
+                <label>Total Cost (LKR)</label>
+                <input type="number" id="vendorTotal" placeholder="0.00">
+            </div>
+            <div class="form-group">
+                <label>Amount Paid (LKR)</label>
+                <input type="number" id="vendorPaid" placeholder="0.00">
+            </div>
+            <button class="submit-btn" id="vendorBtn" onclick="submitData('Vendor')">Add Vendor</button>
+            
+            <div class="display-list" id="vendorList"></div>
+        </div>
+
     </div>
+</div>
 
-    <div class="tabs">
-        <button class="tab-button active" onclick="openTab('budget')">Budget</button>
-        <button class="tab-button" onclick="openTab('guests')">Guest List</button>
-        <button class="tab-button" onclick="openTab('seating')">Seating</button>
-        <button class="tab-button" onclick="openTab('vendors')">Vendors & Payments</button>
-    </div>
+<script>
+    // Replace with your Web App URL
+    const WEB_APP_URL = 'YOUR_WEB_APP_URL_HERE';
 
-    <!-- Budget Tab -->
-    <div id="budget" class="tab-content active">
-        <h2>Budget Planner</h2>
-        <div class="form-group">
-            <label>Category</label>
-            <select id="budgetCategory">
-                <option value="Decorations">Decorations</option>
-                <option value="Photography">Photography</option>
-                <option value="Videography">Videography</option>
-                <option value="Poruwa">Poruwa</option>
-                <option value="Dresses">Dresses/Attire</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Specific Item/Detail</label>
-            <input type="text" id="budgetItem" placeholder="e.g. Bridal Bouquet">
-        </div>
-        <div class="form-group">
-            <label>Estimated/Actual Cost (LKR)</label>
-            <input type="number" id="budgetCost" placeholder="0.00">
-        </div>
-        <button class="submit-btn" onclick="submitData('addBudget')">Add to Budget</button>
-    </div>
+    // Local state to display items on screen immediately
+    let appData = { Budget: [], Guest: [], Vendor: [] };
 
-    <!-- Guest List Tab -->
-    <div id="guests" class="tab-content">
-        <h2>Guest List Management</h2>
-        <div class="form-group">
-            <label>Guest Full Name (Primary)</label>
-            <input type="text" id="guestName" placeholder="e.g. Mr. John Doe">
-        </div>
-        <div class="form-group">
-            <label>Which side?</label>
-            <select id="guestSide">
-                <option value="Bride">Bride's Side</option>
-                <option value="Groom">Groom's Side</option>
-                <option value="Common">Common Guest</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Total Party Size (including primary guest)</label>
-            <input type="number" id="guestCount" value="1" min="1">
-        </div>
-        <button class="submit-btn" onclick="submitData('addGuest')">Add Guest</button>
-    </div>
+    function openTab(tabName) {
+        document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
+        document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+        document.getElementById(tabName).classList.add("active");
+        event.currentTarget.classList.add("active");
+    }
 
-    <!-- Seating Tab -->
-    <div id="seating" class="tab-content">
-        <h2>Seating Arrangement</h2>
-        <p><i>Note: To map seats visually, we will link this to the Google Sheet backend in phase 2 so you can drag-and-drop or select tables for the guests you've added.</i></p>
-    </div>
+    async function submitData(type) {
+        const btn = document.getElementById(type.toLowerCase() + 'Btn');
+        const idField = document.getElementById(type.toLowerCase() + 'Id');
+        const isEditing = idField.value !== "";
+        
+        let payload = { 
+            action: (isEditing ? 'edit' : 'add') + type,
+            id: idField.value 
+        };
+        let localItem = { id: payload.id || Date.now().toString() };
 
-    <!-- Vendors Tab -->
-    <div id="vendors" class="tab-content">
-        <h2>Vendors & Payments</h2>
-        <div class="form-group">
-            <label>Service Type</label>
-            <input type="text" id="vendorService" placeholder="e.g. Catering">
-        </div>
-        <div class="form-group">
-            <label>Vendor Name</label>
-            <input type="text" id="vendorName" placeholder="Company or Person name">
-        </div>
-        <div class="form-group">
-            <label>Total Cost Negotiated (LKR)</label>
-            <input type="number" id="vendorTotal" placeholder="0.00">
-        </div>
-        <div class="form-group">
-            <label>Advance/Amount Paid So Far (LKR)</label>
-            <input type="number" id="vendorPaid" placeholder="0.00">
-        </div>
-        <button class="submit-btn" onclick="submitData('addVendor')">Add Vendor Payment</button>
-    </div>
+        // Gather data based on active tab
+        if(type === 'Budget') {
+            payload.category = document.getElementById('budgetCategory').value;
+            payload.item = document.getElementById('budgetItem').value;
+            payload.cost = document.getElementById('budgetCost').value;
+            
+            localItem.title = payload.item;
+            localItem.desc = `${payload.category} | LKR ${payload.cost}`;
+            localItem.raw = payload;
+        } 
+        else if(type === 'Guest') {
+            payload.name = document.getElementById('guestName').value;
+            payload.side = document.getElementById('guestSide').value;
+            payload.partySize = document.getElementById('guestCount').value;
 
-    <script>
-        // Replace with your deployed Google Apps Script Web App URL
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbznMEKD4UuEpO0lVQ18tREj0FF_coIN6AC6QcQArPSNnGfxScCHbB5nuUQCsna0JcYG/exec';
+            localItem.title = payload.name;
+            localItem.desc = `${payload.side}'s Side | Party of ${payload.partySize}`;
+            localItem.raw = payload;
+        }
+        else if(type === 'Vendor') {
+            payload.service = document.getElementById('vendorService').value;
+            payload.vendorName = document.getElementById('vendorName').value;
+            payload.totalCost = document.getElementById('vendorTotal').value;
+            payload.amountPaid = document.getElementById('vendorPaid').value;
 
-        function openTab(tabName) {
-            let i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tab-button");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            event.currentTarget.className += " active";
+            localItem.title = payload.vendorName;
+            localItem.desc = `${payload.service} | Total: LKR ${payload.totalCost} | Paid: LKR ${payload.amountPaid}`;
+            localItem.raw = payload;
         }
 
-        async function submitData(actionType) {
-            let payload = { action: actionType };
-
-            if(actionType === 'addBudget') {
-                payload.category = document.getElementById('budgetCategory').value;
-                payload.item = document.getElementById('budgetItem').value;
-                payload.cost = document.getElementById('budgetCost').value;
-            } 
-            else if(actionType === 'addGuest') {
-                payload.name = document.getElementById('guestName').value;
-                payload.side = document.getElementById('guestSide').value;
-                payload.partySize = document.getElementById('guestCount').value;
-            }
-            else if(actionType === 'addVendor') {
-                payload.service = document.getElementById('vendorService').value;
-                payload.vendorName = document.getElementById('vendorName').value;
-                payload.totalCost = document.getElementById('vendorTotal').value;
-                payload.amountPaid = document.getElementById('vendorPaid').value;
-            }
-
-            try {
-                // Change button text to show loading
-                const btn = event.target;
-                const originalText = btn.innerText;
-                btn.innerText = "Saving...";
-                btn.disabled = true;
-
-                const response = await fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(payload),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-                });
-                
-                const result = await response.json();
-                if(result.status === 'Success') {
-                    alert('Saved successfully!');
-                    // Clear inputs based on tab (optional enhancement)
-                } else {
-                    alert('Error saving data. Please try again.');
-                }
-
-                btn.innerText = originalText;
-                btn.disabled = false;
-
-            } catch (error) {
-                alert('Network error. Check console and URL.');
-                console.error(error);
-            }
+        // Update UI locally first for snappy feel
+        if (isEditing) {
+            const index = appData[type].findIndex(i => i.id === payload.id);
+            if(index > -1) appData[type][index] = localItem;
+        } else {
+            payload.id = localItem.id; // ensure ID is passed to backend for new items
+            appData[type].push(localItem);
         }
-    </script>
+        
+        renderList(type);
+        resetForm(type);
+
+        // Send to backend
+        try {
+            btn.innerText = "Saving to Sheets...";
+            const response = await fetch(WEB_APP_URL, {
+                method: 'POST',
+                body: JSON.stringify(payload),
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+            });
+            await response.json();
+            btn.innerText = `Add ${type}`;
+        } catch (error) {
+            console.error(error);
+            btn.innerText = `Add ${type} (Offline/Error)`;
+        }
+    }
+
+    function renderList(type) {
+        const listDiv = document.getElementById(type.toLowerCase() + 'List');
+        listDiv.innerHTML = '';
+        
+        appData[type].forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'list-item';
+            div.innerHTML = `
+                <div class="list-item-details">
+                    <h4>${item.title}</h4>
+                    <p>${item.desc}</p>
+                </div>
+                <button class="edit-btn" onclick='editItem("${type}", ${JSON.stringify(item)})'>Edit</button>
+            `;
+            listDiv.appendChild(div);
+        });
+    }
+
+    function editItem(type, item) {
+        // Scroll to top of panel
+        document.querySelector('.glass-panel').scrollIntoView({ behavior: 'smooth' });
+        
+        document.getElementById(type.toLowerCase() + 'Id').value = item.id;
+        document.getElementById(type.toLowerCase() + 'Btn').innerText = `Update ${type}`;
+
+        if(type === 'Budget') {
+            document.getElementById('budgetCategory').value = item.raw.category;
+            document.getElementById('budgetItem').value = item.raw.item;
+            document.getElementById('budgetCost').value = item.raw.cost;
+        } else if(type === 'Guest') {
+            document.getElementById('guestName').value = item.raw.name;
+            document.getElementById('guestSide').value = item.raw.side;
+            document.getElementById('guestCount').value = item.raw.partySize;
+        } else if(type === 'Vendor') {
+            document.getElementById('vendorService').value = item.raw.service;
+            document.getElementById('vendorName').value = item.raw.vendorName;
+            document.getElementById('vendorTotal').value = item.raw.totalCost;
+            document.getElementById('vendorPaid').value = item.raw.amountPaid;
+        }
+    }
+
+    function resetForm(type) {
+        const prefix = type.toLowerCase();
+        document.getElementById(prefix + 'Id').value = "";
+        document.getElementById(prefix + 'Btn').innerText = `Add ${type}`;
+        
+        if(type === 'Budget') {
+            document.getElementById('budgetItem').value = "";
+            document.getElementById('budgetCost').value = "";
+        } else if(type === 'Guest') {
+            document.getElementById('guestName').value = "";
+            document.getElementById('guestCount').value = "1";
+        } else if(type === 'Vendor') {
+            document.getElementById('vendorService').value = "";
+            document.getElementById('vendorName').value = "";
+            document.getElementById('vendorTotal').value = "";
+            document.getElementById('vendorPaid').value = "";
+        }
+    }
+</script>
 </body>
 </html>
