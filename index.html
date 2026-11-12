@@ -1,416 +1,929 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ishini & Isuru | Wedding Planner</title>
-    <style>
-        :root {
-            --sage-green: #A3B18A;
-            --glass-bg: rgba(20, 30, 20, 0.65);
-            --glass-border: rgba(163, 177, 138, 0.3);
-            --text-light: #EAEAEA;
-        }
-        
-        body, html {
-            margin: 0; padding: 0;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: var(--text-light);
-            background-color: #111;
-            scroll-behavior: smooth;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ishini &amp; Isuru</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%233f4a3c'/%3E%3Ctext x='16' y='21' font-size='13' text-anchor='middle' fill='%23fff' font-family='Georgia'%3EI%26I%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf7f2; --card:#fff; --ink:#2a2522; --muted:#8b8279; --line:#ebe4d9; --soft:#f4efe7;
+  --accent:#3f4a3c; --gold:#b08d57;
+  --isuru:#4f6d7a; --ishini:#b5656b; --other:#b08d57;
+  --good:#4f7a55; --bad:#b4493f; --radius:14px;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --hero-pos:center 30%;            /* move the photo focus: e.g. center 10% (higher) or center 60% (lower) */
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+h2{font:500 32px/1.1 var(--serif);margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 4px}
+a{color:inherit}
 
-        /* Hero */
-        .hero-section {
-            height: 100vh;
-            background-image: linear-gradient(rgba(10, 15, 10, 0.4), rgba(10, 15, 10, 0.8)), url('couple_image_1.jpg');
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-        }
-        .hero-section img.logo { width: 120px; margin-bottom: 20px; filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.8)); }
-        .hero-section h1 { font-weight: 300; letter-spacing: 6px; color: var(--sage-green); font-size: 2.5rem; margin: 0; }
-        
-        .scroll-down {
-            position: absolute; bottom: 40px; text-decoration: none; color: var(--text-light);
-            font-size: 0.9em; letter-spacing: 2px; animation: bounce 2s infinite;
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-15px); }
-            60% { transform: translateY(-7px); }
-        }
+/* hero */
+.liquid-glass{background:rgba(0,0,0,.4);background-blend-mode:luminosity;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,.1);position:relative;overflow:hidden}
+.liquid-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;
+  background:linear-gradient(180deg,rgba(255,255,255,.3) 0%,rgba(255,255,255,.1) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.1) 80%,rgba(255,255,255,.3) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.hero{--scrim:.5;--pad:clamp(16px,4vw,64px);position:relative;isolation:isolate;overflow:hidden;color:#fff;
+  min-height:100vh;min-height:100svh;display:flex;flex-direction:column;
+  background:linear-gradient(155deg,#46523f 0%,#242b23 55%,#2e2420 100%)}
+.hero-bg,.hero-vid{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.hero-bg{background:center var(--hero-pos)/cover no-repeat;opacity:0;transition:opacity 1s}
+.hero-bg.on{opacity:1}
+.hero-vid{object-fit:cover;object-position:var(--hero-pos);opacity:0;transition:opacity 1.4s}
+.hero-vid.on{opacity:1}
+.hero::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(to top,rgba(0,0,0,var(--scrim)) 0%,rgba(0,0,0,0) 52%)}
+.hero-in{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:120px var(--pad) clamp(28px,6vh,64px)}
+.hero-grid{width:100%;max-width:1240px;margin:0 auto;display:grid;gap:28px;align-items:end}
+@media (min-width:980px){.hero-grid{grid-template-columns:1fr auto}}
+.eyebrow{letter-spacing:.34em;text-transform:uppercase;font-size:11px;font-weight:500;opacity:.9}
+.names{font:500 clamp(58px,11.5vw,142px)/.92 var(--serif);letter-spacing:-.025em;margin:16px 0 20px}
+.names .line{display:block}
+.names .ch{display:inline-block;opacity:0;transform:translateX(-18px);transition:opacity .5s ease,transform .5s ease;transition-delay:var(--d,0ms)}
+.names.go .ch{opacity:1;transform:none}
+.names.instant .ch{transition:none}
+.names .amp{color:#d9b97a;font-weight:400;font-style:italic}
+.when{font:italic 400 clamp(19px,2.6vw,26px) var(--serif);margin:0 0 26px;color:rgba(255,255,255,.88)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.cta{display:inline-block;padding:12px 28px;border-radius:12px;font-weight:500;font-size:14px;text-decoration:none;transition:background .25s,color .25s}
+.cta.solid{background:#fff;color:#111}.cta.solid:hover{background:#f1ede6}
+.cta.glass{color:#fff;border:1px solid rgba(255,255,255,.2)}.cta.glass:hover{background:#fff;color:#111}
+.fade{opacity:0;transition:opacity 1s ease var(--fd,0ms)}
+.hero.in .fade{opacity:1}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);border-radius:20px;padding:18px 6px;width:100%}
+.cd>div{text-align:center;padding:0 clamp(12px,2.2vw,28px);position:relative}
+.cd>div+div::before{content:'';position:absolute;left:0;top:10%;bottom:10%;width:1px;background:rgba(255,255,255,.16)}
+.cd b{display:block;font:500 clamp(34px,5vw,54px)/1 var(--serif);font-variant-numeric:tabular-nums}
+.cd span{display:block;margin-top:6px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;opacity:.75}
+@media (min-width:980px){.cd{width:auto;min-width:440px}}
+@media (prefers-reduced-motion:reduce){.names .ch,.fade,.hero-vid,.hero-bg{transition:none!important;opacity:1!important;transform:none!important}.hero-vid:not(.on){opacity:0!important}}
 
-        /* Container & Panels */
-        .app-container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; min-height: 100vh; }
-        .glass-panel {
-            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); border-radius: 16px; padding: 40px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-        }
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:30;padding:14px var(--pad,16px) 0;pointer-events:none}
+.nav-in{pointer-events:auto;max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:8px 12px 8px 16px;border-radius:16px;transition:background .3s,-webkit-backdrop-filter .3s,backdrop-filter .3s}
+.nav.scrolled .nav-in{background:rgba(26,22,19,.74);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.logo{font:500 25px/1 var(--serif);color:#fff;background:none;border:0;cursor:pointer;padding:2px 8px 2px 0;letter-spacing:.02em;white-space:nowrap}
+.logo i{color:#d9b97a;font-style:italic;padding:0 .08em}
+.tabs{display:flex;gap:2px;overflow-x:auto;flex:1;justify-content:center;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:7px 14px;border-radius:10px;color:rgba(255,255,255,.78);font-weight:500;font-size:13px;text-decoration:none;white-space:nowrap;transition:color .2s,background .2s}
+.tab:hover{color:#fff}
+.tab.on{background:#fff;color:#111}
+.status{font-size:12px;color:rgba(255,255,255,.78);display:flex;align-items:center;gap:7px;white-space:nowrap}
+.dot{width:7px;height:7px;border-radius:50%;background:#6fcf8a}
+.dot.warn{background:#e8b04a}.dot.bad{background:#e8695e}.dot.off{background:#b8b0a5}
 
-        /* Tabs */
-        .tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
-        .tab-button {
-            background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: var(--text-light);
-            padding: 12px 20px; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
-        }
-        .tab-button:hover, .tab-button.active { background: rgba(163, 177, 138, 0.3); border-color: var(--sage-green); }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+.wrap{max-width:1240px;margin:0 auto;padding:34px 16px 90px;scroll-margin-top:92px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 
-        /* Dashboard */
-        .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .stat-card { background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); padding: 20px; border-radius: 12px; text-align: center; }
-        .stat-card h3 { color: var(--sage-green); margin: 0 0 10px 0; font-size: 2rem;}
-        .stat-card p { margin: 0; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; color: #ccc;}
+/* controls */
+.btn{font:500 13px var(--sans);padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:#cdc2b2}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.pri:hover{background:#2f382d}
+.btn.sm{padding:5px 11px;font-size:12px}
+.btn.ghost{border-color:transparent;background:none;color:var(--muted)}
+.btn.ghost:hover{color:var(--bad)}
+input,select,textarea,button{font:inherit;color:inherit}
+.cell{width:100%;border:1px solid transparent;background:transparent;border-radius:8px;padding:6px 8px;outline:0;min-width:0}
+.cell:hover{background:var(--soft)}
+.cell:focus{background:#fff;border-color:var(--gold)}
+select.cell{appearance:none;-webkit-appearance:none;cursor:pointer}
+input[type=number]{-moz-appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.search{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;min-width:200px;outline:0}
+.search:focus{border-color:var(--gold)}
+.seg{display:inline-flex;background:var(--soft);border-radius:10px;padding:3px;gap:2px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.seg button{border:0;background:none;padding:6px 12px;border-radius:8px;font:500 12.5px var(--sans);color:var(--muted);cursor:pointer;white-space:nowrap}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.x{border:0;background:none;color:#b9b0a4;cursor:pointer;font-size:18px;line-height:1;padding:4px 7px;border-radius:8px}
+.x:hover{color:var(--bad);background:#fbeeec}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.bar-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}
+.pill{padding:5px 12px;border-radius:999px;font-size:12.5px;background:#fff;border:1px solid var(--line);color:var(--muted)}
+.pill b{color:var(--ink);font-weight:600}
 
-        /* Forms */
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-size: 0.9em; color: #ccc; }
-        input, select, textarea {
-            width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--glass-border);
-            color: var(--text-light); border-radius: 6px; box-sizing: border-box; outline: none; font-family: inherit;
-        }
-        input:focus, select:focus, textarea:focus { border-color: var(--sage-green); }
-        button.submit-btn {
-            width: 100%; background: rgba(163, 177, 138, 0.2); border: 1px solid var(--sage-green);
-            color: var(--text-light); padding: 15px; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s;
-        }
-        button.submit-btn:hover { background: var(--sage-green); color: #111; font-weight: bold; }
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0}
+.stat{display:block;text-decoration:none;transition:.15s}
+a.stat:hover{border-color:#cdc2b2;transform:translateY(-1px)}
+.stat small{display:block;color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.stat b{display:block;font:500 31px/1.15 var(--serif);margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.stat b em{font-style:normal;color:var(--muted);font-size:22px}
+.stat span{color:var(--muted);font-size:12.5px}
+.pos{color:var(--good)}.neg{color:var(--bad)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
+.card h3{font:500 22px var(--serif);margin:0 0 10px}
+.field{display:grid;grid-template-columns:110px 1fr;gap:8px;align-items:center;margin:6px 0}
+.field label{color:var(--muted);font-size:12.5px}
+.field .cell{border-color:var(--line);background:#fff}
+.hint{color:var(--muted);font-size:12.5px;margin:8px 0 0}
 
-        /* Lists */
-        .list-item {
-            background: rgba(0, 0, 0, 0.2); border: 1px solid var(--glass-border); padding: 15px; border-radius: 8px; 
-            margin-top: 10px; display: flex; justify-content: space-between; align-items: center;
-        }
-        .list-item h4 { margin: 0 0 5px 0; color: var(--sage-green); }
-        .list-item p { margin: 0; font-size: 0.9em; color: #bbb; }
-        .edit-btn { background: transparent; border: 1px solid var(--sage-green); color: var(--sage-green); padding: 6px 12px; border-radius: 4px; cursor: pointer; }
-        .edit-btn:hover { background: var(--sage-green); color: #111; }
-        input[type="hidden"] { display: none; }
+/* data tables */
+.tbl-wrap{overflow:auto;max-height:72vh;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+table.grid{border-collapse:collapse;width:100%}
+.grid.wide{min-width:980px}
+.grid th{position:sticky;top:0;z-index:2;background:#fbf8f3;text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:10px 8px;border-bottom:1px solid var(--line);font-weight:600;white-space:nowrap}
+.grid th[data-sort]{cursor:pointer}.grid th[data-sort]:hover{color:var(--ink)}
+.grid td{padding:2px 3px;border-bottom:1px solid #f3eee6;vertical-align:middle}
+.grid tr:last-child td{border-bottom:0}
+.grid .c{text-align:center}.grid input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.w70{width:70px}.w90{width:92px}.w120{width:128px}.w40{width:40px}
+.s-isuru{color:var(--isuru);font-weight:500}.s-ishini{color:var(--ishini);font-weight:500}.s-other{color:var(--other);font-weight:500}
+.st-booked{color:var(--good);font-weight:600}.st-shortlisted{color:var(--gold);font-weight:600}
+.st-rejected{color:#b9b0a4;text-decoration:line-through}.st-contacted,.st-visited{color:var(--isuru);font-weight:500}
+.ext{text-decoration:none;color:var(--gold);padding:0 6px;font-weight:600}
+.empty-row td{padding:30px;text-align:center;color:var(--muted)}
 
-        /* Seating Drag & Drop */
-        .seating-dashboard { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
-        .unassigned-zone {
-            flex: 1; min-width: 250px; background: rgba(0,0,0,0.4); border: 1px dashed var(--sage-green); 
-            border-radius: 8px; padding: 15px; min-height: 300px;
-        }
-        .tables-zone { flex: 2; display: flex; gap: 15px; flex-wrap: wrap; }
-        .wedding-table {
-            width: 200px; min-height: 250px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); 
-            border-radius: 12px; padding: 20px; display: flex; flex-direction: column; align-items: center;
-        }
-        .wedding-table h4 { margin: 0 0 10px 0; color: var(--sage-green); border-bottom: 1px solid var(--glass-border); padding-bottom: 5px; width: 100%; text-align: center; }
-        .drop-area { flex-grow: 1; width: 100%; min-height: 150px; }
-        .guest-card {
-            background: rgba(163, 177, 138, 0.2); border: 1px solid var(--sage-green); color: var(--text-light); 
-            padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; cursor: grab; font-size: 0.9em; text-align: center;
-        }
-        .guest-card:active { cursor: grabbing; opacity: 0.7; }
-        .guest-card span { display: block; font-size: 0.8em; color: #ccc; }
-    </style>
+/* seating */
+.seat-layout{display:grid;grid-template-columns:290px 1fr;gap:18px;align-items:start;margin-top:14px}
+.pool{position:sticky;top:90px;max-height:calc(100vh - 108px);display:flex;flex-direction:column;gap:10px;padding:14px}
+.pool>*{flex-shrink:0}
+.pool>.pool-list{flex:1 1 auto;min-height:70px}
+.pool-h{display:flex;justify-content:space-between;align-items:baseline}
+.pool-h span{color:var(--muted);font-size:12px}
+.pool .search{min-width:0;width:100%}
+.pool-list{overflow:auto;display:flex;flex-direction:column;gap:6px;min-height:70px;padding:2px}
+.chip{display:flex;align-items:center;gap:8px;padding:7px 8px 7px 10px;border:1px solid var(--line);border-left:4px solid var(--c,#ccc);background:#fff;border-radius:10px;cursor:grab;font-size:13px;user-select:none;-webkit-user-select:none}
+.chip.isuru{--c:var(--isuru)}.chip.ishini{--c:var(--ishini)}.chip.other{--c:var(--other)}
+.chip .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.chip .n{font-size:11px;color:var(--muted);background:var(--soft);padding:1px 8px;border-radius:999px}
+.chip .un{border:0;background:none;color:#b9b0a4;cursor:pointer;font-size:16px;line-height:1;padding:0 3px}
+.chip .un:hover{color:var(--bad)}
+.chip.sel{outline:2px solid var(--gold);background:#fffaf0}
+.chip.drag{opacity:.4}
+.tables{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.tbl{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px;transition:border-color .15s,box-shadow .15s}
+.tbl.over,.pool.over{border-color:var(--gold);box-shadow:0 0 0 3px rgba(176,141,87,.2)}
+.picking .tbl{cursor:pointer}
+.tbl-head{display:flex;gap:4px;align-items:center}
+.tname{font:500 19px var(--serif)!important}
+.tbl svg{display:block;margin:2px auto 8px;width:172px;height:172px}
+.seat{stroke-width:1.5}
+.seat.free{fill:#fff;stroke:#d8cfc2}
+.seat.isuru{fill:var(--isuru);stroke:var(--isuru)}.seat.ishini{fill:var(--ishini);stroke:var(--ishini)}.seat.other{fill:var(--other);stroke:var(--other)}
+.top{fill:var(--soft);stroke:var(--line);stroke-width:1.5}
+.tt{font:600 24px var(--serif);fill:var(--ink)}
+.over-cap .top{stroke:var(--bad)}.over-cap .tt{fill:var(--bad)}
+.chips{display:flex;flex-direction:column;gap:5px;min-height:36px}
+.empty{color:#b9b0a4;font-size:12.5px;text-align:center;padding:8px;border:1px dashed var(--line);border-radius:10px}
+.tbl-foot{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:8px;color:var(--muted);font-size:12px}
+.tbl-foot .cap{width:56px;text-align:center;border-color:var(--line)}
+.legend{display:flex;gap:14px;color:var(--muted);font-size:12px;align-items:center;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+
+/* budget */
+.plans{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:6px 0 10px}
+.plans .pbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;font-weight:500;cursor:pointer}
+.plans .pbtn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cat{padding:0;margin-top:10px;overflow:hidden}
+.cat-h{display:grid;grid-template-columns:28px minmax(120px,1.3fr) repeat(3,minmax(88px,.55fr));gap:10px;align-items:center;padding:12px 16px;cursor:pointer}
+.cat-h .chev{color:var(--muted);transition:.15s;font-size:12px}
+.cat.open .chev{transform:rotate(90deg)}
+.cat-h .cname{font:500 20px var(--serif);cursor:text}
+.cat-h .cv{font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+.cat-h .cv small{display:block;color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.cat-bar{height:3px;background:var(--soft)}
+.cat-bar i{display:block;height:100%;background:var(--gold);transition:width .25s}
+.cat-b{display:none;padding:6px 12px 14px;border-top:1px solid var(--line)}
+.cat.open .cat-b{display:block}
+.cat-b .grid th{position:static;background:none;padding:8px 6px}
+.cat-b .foot{display:flex;justify-content:space-between;margin-top:6px}
+.compare th,.compare td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--line)}
+.compare th:first-child,.compare td:first-child{text-align:left}
+.compare{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+
+.banner{position:fixed;top:84px;left:50%;transform:translateX(-50%);z-index:35;background:#fff6e5;border:1px solid #f0d9a8;border-radius:12px;padding:10px 16px;text-align:center;font-size:13px;box-shadow:0 10px 34px rgba(0,0,0,.18);width:max-content;max-width:92vw;color:#2a2522}
+.banner .btn{margin-left:6px}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:60;display:flex;gap:12px;align-items:center;max-width:92vw}
+#toast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#toast button{background:none;border:0;color:#e8c98f;font-weight:600;cursor:pointer}
+dialog{border:0;border-radius:16px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.25);width:min(340px,92vw)}
+dialog::backdrop{background:rgba(30,24,20,.45)}
+dialog h3{font:500 24px var(--serif);margin:0 0 4px}
+dialog input{width:100%;margin:12px 0;border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:0}
+dialog input:focus{border-color:var(--gold)}
+dialog .row{justify-content:flex-end}
+
+@media (max-width:860px){
+  .seat-layout{grid-template-columns:1fr}
+  .pool{position:static;max-height:300px}
+  .cat-h{grid-template-columns:22px 1fr 90px;}
+  .cat-h .cv.hide-s{display:none}
+  .status span{display:none}
+  .logo{font-size:21px}
+  .nav-in{padding:7px 10px 7px 14px;gap:8px}
+  .tab{padding:7px 11px}
+  .tabs{justify-content:flex-start}
+  h2{font-size:28px}
+}
+</style>
 </head>
 <body>
 
-    <div class="hero-section">
-        <img src="gold_logo.png" alt="I and I Logo" class="logo" onerror="this.style.display='none'">
-        <h1>ISHINI & ISURU</h1>
-        <a href="#planner" class="scroll-down">▼ SCROLL TO ENTER ▼</a>
-    </div>
+<div id="banner"></div>
 
-    <div id="planner" class="app-container">
-        <div class="glass-panel">
-            <div class="tabs">
-                <button class="tab-button active" onclick="openTab('dashboard')">Dashboard</button>
-                <button class="tab-button" onclick="openTab('budget')">Budget</button>
-                <button class="tab-button" onclick="openTab('guests')">Guests</button>
-                <button class="tab-button" onclick="openTab('vendors')">Vendors</button>
-                <button class="tab-button" onclick="openTab('seating')">Seating</button>
-            </div>
+<nav class="nav" id="nav">
+  <div class="nav-in liquid-glass">
+    <button class="logo" data-top aria-label="Back to top">I<i>&amp;</i>I</button>
+    <div class="tabs" id="tabs"></div>
+    <div class="status"><i class="dot warn" id="dot"></i><span id="statusText">Loading…</span></div>
+  </div>
+</nav>
 
-            <!-- Dashboard -->
-            <div id="dashboard" class="tab-content active">
-                <h2 style="text-align:center; color: var(--sage-green); margin-bottom: 30px;">Overview</h2>
-                <div class="dash-grid">
-                    <div class="stat-card"><h3 id="dashGuests">0</h3><p>Total Guests</p></div>
-                    <div class="stat-card"><h3 id="dashBudget">0</h3><p>Budget (LKR)</p></div>
-                    <div class="stat-card"><h3 id="dashPaid">0</h3><p>Paid (LKR)</p></div>
-                </div>
-                <p style="text-align: center; margin-top: 30px; font-size: 0.9em; color: #888;" id="syncStatus">Syncing with Google Sheets...</p>
-            </div>
-
-            <!-- Budget -->
-            <div id="budget" class="tab-content">
-                <input type="hidden" id="budgetId">
-                <div class="form-group"><label>Category</label>
-                    <select id="budgetCategory"><option>Decorations</option><option>Photography</option><option>Videography</option><option>Poruwa</option><option>Dresses</option><option>Other</option></select>
-                </div>
-                <div class="form-group"><label>Specific Item</label><input type="text" id="budgetItem"></div>
-                <div class="form-group"><label>Cost (LKR)</label><input type="number" id="budgetCost"></div>
-                <button class="submit-btn" id="budgetBtn" onclick="submitData('Budget')">Add to Budget</button>
-                <div id="budgetList"></div>
-            </div>
-
-            <!-- Guests -->
-            <div id="guests" class="tab-content">
-                <input type="hidden" id="guestId">
-                <div class="form-group"><label>Guest Full Name</label><input type="text" id="guestName"></div>
-                <div class="form-group"><label>Which side?</label>
-                    <select id="guestSide"><option>Bride</option><option>Groom</option><option>Common</option></select>
-                </div>
-                <div class="form-group"><label>Total Party Size</label><input type="number" id="guestCount" value="1" min="1"></div>
-                <button class="submit-btn" id="guestBtn" onclick="submitData('Guests')">Add Guest</button>
-                <div id="guestsList"></div>
-            </div>
-
-            <!-- Vendors -->
-            <div id="vendors" class="tab-content">
-                <input type="hidden" id="vendorId">
-                <div class="form-group"><label>Service Type</label><input type="text" id="vendorService"></div>
-                <div class="form-group"><label>Vendor Name</label><input type="text" id="vendorName"></div>
-                <div class="form-group"><label>Total Cost (LKR)</label><input type="number" id="vendorTotal"></div>
-                <div class="form-group"><label>Amount Paid (LKR)</label><input type="number" id="vendorPaid"></div>
-                <button class="submit-btn" id="vendorBtn" onclick="submitData('Vendors')">Add Vendor</button>
-                <div id="vendorsList"></div>
-            </div>
-
-            <!-- Seating -->
-            <div id="seating" class="tab-content">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h2 style="color: var(--sage-green); margin: 0;">Table Mapping</h2>
-                    <button class="edit-btn" onclick="addTable()">+ Add Table</button>
-                </div>
-                <p style="font-size: 0.85em; color: #aaa;">Drag a guest from the Unassigned zone and drop them onto a table. It saves automatically.</p>
-                
-                <div class="seating-dashboard">
-                    <div class="unassigned-zone">
-                        <h4 style="margin-top:0; color: var(--text-light); text-align: center;">Unassigned</h4>
-                        <div id="Unassigned" class="drop-area" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
-                    </div>
-                    <div class="tables-zone" id="tablesContainer">
-                        <div class="wedding-table">
-                            <h4>Table 1</h4>
-                            <div id="Table_1" class="drop-area" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+<header class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-in">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow fade" id="hEyebrow" style="--fd:300ms">We're getting married</div>
+        <h1 class="names" id="hNames"></h1>
+        <p class="when fade" id="hWhen" style="--fd:900ms"></p>
+        <div class="ctas fade" style="--fd:1200ms">
+          <a class="cta solid" href="#overview">Open planner</a>
+          <a class="cta glass" href="#seating">Seating plan</a>
         </div>
+      </div>
+      <div class="fade" style="--fd:1400ms">
+        <div class="cd liquid-glass" role="timer" aria-label="Countdown to the wedding">
+          <div><b id="cD">–</b><span>Days</span></div>
+          <div><b id="cH">–</b><span>Hours</span></div>
+          <div><b id="cM">–</b><span>Minutes</span></div>
+          <div><b id="cS">–</b><span>Seconds</span></div>
+        </div>
+      </div>
     </div>
+  </div>
+</header>
+
+<main class="wrap" id="main"><div id="app"></div></main>
+
+<div id="toast"></div>
+
+<dialog id="pinDlg">
+  <form method="dialog">
+    <h3>Planner PIN</h3>
+    <div class="sub" id="pinMsg">Enter your PIN</div>
+    <input id="pinIn" type="password" autocomplete="current-password" placeholder="PIN">
+    <div class="row"><button class="btn pri" value="ok" style="order:2">Open</button><button class="btn" value="cancel" style="order:1">Cancel</button></div>
+  </form>
+</dialog>
+
+<datalist id="rels"><option>Friends</option><option>Relative</option><option>Co-workers</option><option>Neighbours</option><option>Parents</option><option>Crew</option></datalist>
 
 <script>
-    // --- SETUP ---
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbznMEKD4UuEpO0lVQ18tREj0FF_coIN6AC6QcQArPSNnGfxScCHbB5nuUQCsna0JcYG/exec'; // <--- PASTE DEPLOYED URL HERE
-    let appData = { Budget: [], Guests: [], Vendors: [] };
-    let tableCount = 1;
+(() => {
+'use strict';
 
-    // --- FETCH DATA ON LOAD ---
-    window.onload = async function() {
-        try {
-            const res = await fetch(WEB_APP_URL);
-            const json = await res.json();
-            if(json.status === 'Success') {
-                appData.Budget = json.data.Budget.map(r => ({ id: r[0], raw: { category: r[2], item: r[3], cost: r[4] }, title: r[3], desc: `${r[2]} | LKR ${r[4]}` }));
-                appData.Guests = json.data.Guests.map(r => ({ id: r[0], raw: { name: r[2], side: r[3], partySize: r[4], table: r[5] }, title: r[2], desc: `${r[3]}'s Side | Party of ${r[4]}` }));
-                appData.Vendors = json.data.Vendors.map(r => ({ id: r[0], raw: { service: r[2], vendorName: r[3], amountPaid: r[4], totalCost: r[5] }, title: r[3], desc: `${r[2]} | Total: LKR ${r[5]} | Paid: LKR ${r[4]}` }));
-                
-                // Initialize required tables based on saved guest data
-                const highestTable = Math.max(...appData.Guests.map(g => parseInt(g.raw.table?.replace('Table_','')) || 1));
-                while(tableCount < highestTable) { addTable(); }
+/* ============ SETTINGS — edit these ============ */
+const API_URL = 'https://script.google.com/macros/s/AKfycbznMEKD4UuEpO0lVQ18tREj0FF_coIN6AC6QcQArPSNnGfxScCHbB5nuUQCsna0JcYG/exec';   // ← paste your Apps Script Web app URL here (…/exec). Leave empty to try the site without syncing.
+const IMAGES  = ['couple.jpg', 'couple.jpeg', 'couple.png', 'couple.webp'];   // your photo (shows first, and if there is no video)
+const VIDEO   = 'couple.mp4';   // optional looping background video, same folder. Set to '' to turn off.
+/* ================================================ */
 
-                updateAllViews();
-                document.getElementById('syncStatus').innerText = "Data synced successfully ✓";
-            }
-        } catch (e) {
-            document.getElementById('syncStatus').innerText = "Working offline. Could not sync with Sheets.";
-        }
-    };
+const LS = 'ishini-isuru-planner-v1', LS_PIN = 'ishini-isuru-planner-pin';
+const SIDES = [['isuru', 'Isuru'], ['ishini', 'Ishini'], ['other', 'Other']];
+const RSVPS = [['', '—'], ['yes', 'Yes'], ['no', 'No'], ['maybe', 'Maybe']];
+const STATUSES = ['To contact', 'Contacted', 'Visited', 'Shortlisted', 'Booked', 'Rejected'];
+const TABS = [['overview', 'Overview'], ['guests', 'Guests'], ['seating', 'Seating'], ['budget', 'Budget'], ['vendors', 'Vendors']];
 
-    function openTab(tabName) {
-        document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
-        document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
-        document.getElementById(tabName).classList.add("active");
-        event.currentTarget.classList.add("active");
+/* ---------- helpers ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const n = v => { const x = parseFloat(String(v ?? '').replace(/,/g, '')); return isFinite(x) ? x : 0; };
+const fmt = v => (n(v) ? Math.round(n(v)).toLocaleString('en-US') : '');
+const rs = v => 'Rs ' + Math.round(v || 0).toLocaleString('en-US');
+const uid = p => p + Math.random().toString(36).slice(2, 8) + Date.now().toString(36).slice(-3);
+const slug = s => String(s || '').toLowerCase().replace(/[^a-z]+/g, '');
+const attrs = (coll, id, k) => `data-coll="${coll}" data-id="${esc(id)}" data-k="${k}"`;
+const opt = (list, val) => list.map(([v, l]) => `<option value="${esc(v)}"${v === val ? ' selected' : ''}>${esc(l)}</option>`).join('');
+const seats = g => Math.max(0, n(g.count)) + Math.max(0, n(g.kids));
+
+/* ---------- state ---------- */
+let S = null, rev = 0, dirty = false, saving = false, again = false, conflict = false, timer = null;
+let tab = 'overview';
+const openCats = new Set();
+
+function blankPlan(name) {
+  return { id: uid('p'), name: name || 'Plan A',
+    income: [{ id: uid('n'), label: 'Groom (Isuru)', amount: 0 }, { id: uid('n'), label: 'Bride (Ishini)', amount: 0 }], cats: [] };
+}
+function defaultState() {
+  const p = blankPlan();
+  return { couple: { a: 'Ishini', b: 'Isuru', date: '2027-08-12' }, guests: [],
+    tables: Array.from({ length: 12 }, (_, i) => ({ id: uid('t'), label: 'Table ' + (i + 1), cap: 10 })),
+    vendors: [], plans: [p], activePlan: p.id };
+}
+function normalise(s) {
+  const d = defaultState();
+  s = s && typeof s === 'object' ? s : d;
+  s.couple = Object.assign({}, d.couple, s.couple || {});
+  ['guests', 'tables', 'vendors'].forEach(k => { if (!Array.isArray(s[k])) s[k] = d[k]; });
+  if (!Array.isArray(s.plans) || !s.plans.length) s.plans = [blankPlan()];
+  s.plans.forEach(p => { p.id = p.id || uid('p'); if (!Array.isArray(p.income)) p.income = []; if (!Array.isArray(p.cats)) p.cats = []; p.cats.forEach(c => { if (!Array.isArray(c.items)) c.items = []; }); });
+  if (!s.plans.some(p => p.id === s.activePlan)) s.activePlan = s.plans[0].id;
+  return s;
+}
+const plan = () => S.plans.find(p => p.id === S.activePlan) || S.plans[0];
+const readLocal = () => { try { return JSON.parse(localStorage.getItem(LS)); } catch (e) { return null; } };
+const writeLocal = () => { try { localStorage.setItem(LS, JSON.stringify(S)); } catch (e) {} };
+const getPin = () => { try { return localStorage.getItem(LS_PIN) || ''; } catch (e) { return ''; } };
+const setPin = p => { try { localStorage.setItem(LS_PIN, p); } catch (e) {} };
+
+/* ---------- sync ---------- */
+function setStatus(kind, text) {
+  $('#dot').className = 'dot ' + (kind === 'ok' ? '' : kind);
+  $('#statusText').textContent = text;
+}
+async function apiGet(params) {
+  const u = new URL(API_URL);
+  Object.entries(params).forEach(([k, v]) => u.searchParams.set(k, v));
+  const r = await fetch(u, { redirect: 'follow' });
+  return r.json();
+}
+async function apiPost(body) {
+  const r = await fetch(API_URL, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
+  return r.json();
+}
+function askPin(msg) {
+  return new Promise(res => {
+    const d = $('#pinDlg'), inp = $('#pinIn');
+    $('#pinMsg').textContent = msg || 'Enter your PIN';
+    inp.value = '';
+    d.returnValue = '';
+    d.onclose = () => res(d.returnValue === 'ok' ? inp.value : null);
+    d.showModal(); inp.focus();
+  });
+}
+async function loadRemote() {
+  let res = await apiGet({ action: 'load', pin: getPin() }), tries = 0;
+  while (res.error === 'auth') {
+    const p = await askPin(tries++ ? 'That PIN did not match — try again' : 'Enter your planner PIN');
+    if (p === null) throw new Error('auth cancelled');
+    setPin(p);
+    res = await apiGet({ action: 'load', pin: p });
+  }
+  if (!res.ok) throw new Error(res.error || 'load failed');
+  rev = res.rev;
+  if (res.state) { S = normalise(res.state); }
+  else { S = normalise(readLocal() || defaultState()); touchSave(); }
+  writeLocal();
+  if (!dirty) setStatus('ok', 'Synced');
+}
+function touchSave() {
+  dirty = true; writeLocal();
+  if (!API_URL) { dirty = false; setStatus('off', 'Saved on this device only'); return; }
+  setStatus('warn', 'Saving…');
+  clearTimeout(timer); timer = setTimeout(() => flush(), 900);
+}
+async function flush(force) {
+  if (!API_URL || (conflict && !force)) return;
+  if (saving) { again = true; return; }
+  saving = true; dirty = false;
+  try {
+    const res = await apiPost({ action: 'save', pin: getPin(), baseRev: rev, state: S, force: force || undefined });
+    if (res.ok) { rev = res.rev; if (!dirty && !again) setStatus('ok', 'Saved'); }
+    else if (res.error === 'conflict') { conflict = true; dirty = true; showConflict(); setStatus('bad', 'Needs your attention'); }
+    else if (res.error === 'auth') { dirty = true; const p = await askPin('PIN needed to save'); if (p !== null) { setPin(p); setTimeout(() => flush(), 0); } }
+    else throw new Error(res.error);
+  } catch (e) { dirty = true; setStatus('bad', 'Not saved — retrying'); setTimeout(() => flush(), 6000); }
+  finally { saving = false; if (again) { again = false; flush(); } }
+}
+function showConflict() {
+  $('#banner').innerHTML = `<div class="banner">Someone else saved changes while you were editing.
+    <button class="btn sm" data-act="take-theirs">Load their version</button>
+    <button class="btn sm pri" data-act="keep-mine">Keep mine</button></div>`;
+}
+const editing = () => { const a = document.activeElement; return a && /^(INPUT|SELECT|TEXTAREA)$/.test(a.tagName) && $('#app').contains(a); };
+setInterval(async () => {
+  if (!API_URL || !S || dirty || saving || conflict || document.hidden || editing()) return;
+  try {
+    const r = await apiGet({ action: 'rev', pin: getPin() });
+    if (r.ok && r.rev > rev) { await loadRemote(); render(); toast('Updated with the latest changes'); }
+  } catch (e) {}
+}, 20000);
+window.addEventListener('beforeunload', e => { if (dirty && API_URL) { e.preventDefault(); e.returnValue = ''; } });
+
+/* ---------- toast ---------- */
+let toastT;
+function toast(msg, label, fn) {
+  const t = $('#toast');
+  t.innerHTML = `<span>${esc(msg)}</span>` + (label ? `<button>${esc(label)}</button>` : '');
+  if (label) t.querySelector('button').onclick = () => { fn(); t.classList.remove('on'); };
+  t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), label ? 5000 : 2600);
+}
+function removeFrom(arr, id, after) {
+  const i = arr.findIndex(x => x.id === id); if (i < 0) return;
+  const [r] = arr.splice(i, 1); touchSave(); after && after();
+  toast('Removed', 'Undo', () => { arr.splice(Math.min(i, arr.length), 0, r); touchSave(); after && after(); });
+}
+
+/* ---------- hero ---------- */
+const reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+let heroKey = '', heroAnimated = false;
+function nameHTML(lines) {
+  let k = 0;
+  return lines.map((line, li) => `<span class="line">${[...line].map((ch, i) => {
+    const d = 200 + (k++) * 30;
+    const cls = li === 1 && i === 0 && ch === '&' ? ' amp' : '';
+    return `<span class="ch${cls}" style="--d:${d}ms" aria-hidden="true">${ch === ' ' ? '&nbsp;' : esc(ch)}</span>`;
+  }).join('')}</span>`).join('');
+}
+function renderHero() {
+  const c = S.couple, el = $('#hNames'), key = c.a + '|' + c.b;
+  document.title = `${c.a} & ${c.b}`;
+  if (key !== heroKey) {
+    heroKey = key;
+    el.setAttribute('aria-label', `${c.a} and ${c.b}`);
+    el.innerHTML = nameHTML([c.a, '& ' + c.b]);
+    if (!heroAnimated) { heroAnimated = true; el.classList.remove('go'); setTimeout(() => el.classList.add('go'), 60); }
+    else el.classList.add('go', 'instant');
+  }
+  const d = new Date(c.date + 'T00:00:00');
+  $('#hWhen').textContent = isNaN(d) ? '' : d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  tick();
+}
+function tick() {
+  if (!S) return;
+  const t = new Date(S.couple.date + 'T00:00:00');
+  if (isNaN(t)) { ['cD', 'cH', 'cM', 'cS'].forEach(i => $('#' + i).textContent = '–'); return; }
+  let d = t - Date.now(); const past = d < 0; d = Math.abs(d);
+  $('#cD').textContent = Math.floor(d / 864e5);
+  $('#cH').textContent = String(Math.floor(d % 864e5 / 36e5)).padStart(2, '0');
+  $('#cM').textContent = String(Math.floor(d % 36e5 / 6e4)).padStart(2, '0');
+  $('#cS').textContent = String(Math.floor(d % 6e4 / 1e3)).padStart(2, '0');
+  $('#hEyebrow').textContent = past ? 'Happily married' : "We're getting married";
+}
+setInterval(tick, 1000);
+function loadHeroMedia() {
+  const hero = $('#hero'), bg = $('#heroBg');
+  requestAnimationFrame(() => hero.classList.add('in'));
+  (function tryImg(i) {
+    if (i >= IMAGES.length) return;
+    const im = new Image();
+    im.onload = () => { bg.style.backgroundImage = `url("${IMAGES[i]}")`; bg.classList.add('on'); };
+    im.onerror = () => tryImg(i + 1);
+    im.src = IMAGES[i];
+  })(0);
+  const saver = navigator.connection && navigator.connection.saveData;
+  if (!VIDEO || reduceMotion || saver) return;
+  const v = document.createElement('video');
+  v.className = 'hero-vid'; v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = true; v.preload = 'auto';
+  v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
+  const src = document.createElement('source'); src.src = VIDEO; v.appendChild(src);
+  src.addEventListener('error', () => v.remove());
+  v.addEventListener('error', () => v.remove());
+  v.addEventListener('playing', () => v.classList.add('on'));
+  hero.insertBefore(v, $('.hero-in'));
+  const p = v.play(); if (p && p.catch) p.catch(() => {});
+}
+const navEl = $('#nav');
+const onScroll = () => navEl.classList.toggle('scrolled', scrollY > 40);
+window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+/* ---------- calculations ---------- */
+const proj = i => (n(i.actual) > 0 ? n(i.actual) : n(i.est));
+function catTotals(c) {
+  return c.items.reduce((a, i) => ({ est: a.est + n(i.est), act: a.act + n(i.actual), paid: a.paid + n(i.paid), proj: a.proj + proj(i), left: a.left + Math.max(0, proj(i) - n(i.paid)) }), { est: 0, act: 0, paid: 0, proj: 0, left: 0 });
+}
+function planTotals(p) {
+  const t = p.cats.reduce((a, c) => { const x = catTotals(c); for (const k in x) a[k] += x[k]; return a; }, { est: 0, act: 0, paid: 0, proj: 0, left: 0 });
+  t.income = p.income.reduce((a, x) => a + n(x.amount), 0);
+  t.bal = t.income - t.proj;
+  return t;
+}
+function guestStats() {
+  const g = S.guests, sum = (a, k) => a.reduce((s, x) => s + n(x[k]), 0), by = s => g.filter(x => x.side === s);
+  return { entries: g.length, total: sum(g, 'count'), kids: sum(g, 'kids'), liquor: sum(g, 'liquor'), sent: g.filter(x => x.sent).length,
+    yes: g.filter(x => x.rsvp === 'yes').length, isuru: sum(by('isuru'), 'count'), ishini: sum(by('ishini'), 'count'), other: sum(by('other'), 'count'),
+    need: g.reduce((a, x) => a + seats(x), 0), seated: g.filter(x => x.table).reduce((a, x) => a + seats(x), 0) };
+}
+
+/* ---------- views ---------- */
+function render() {
+  if (!S) return;
+  renderHero();
+  $('#tabs').innerHTML = TABS.map(([k, l]) => `<a class="tab${k === tab ? ' on' : ''}" href="#${k}">${l}</a>`).join('');
+  const v = { overview: vOverview, guests: vGuests, seating: vSeating, budget: vBudget, vendors: vVendors }[tab] || vOverview;
+  $('#app').innerHTML = v();
+  if (tab === 'seating') refreshSeating();
+  if (tab === 'budget') refreshBudget();
+}
+
+function vOverview() {
+  const g = guestStats(), p = plan(), t = planTotals(p), booked = S.vendors.filter(v => v.status === 'Booked').length;
+  const used = S.tables.filter(x => S.guests.some(y => y.table === x.id)).length;
+  const empty = !S.guests.length && !S.vendors.length;
+  return `<h2>Overview</h2><p class="sub">Everything in one glance.</p>
+  <div class="stats">
+    <a class="card stat" href="#guests"><small>Guests</small><b>${g.total}</b><span>${g.isuru} Isuru · ${g.ishini} Ishini${g.other ? ` · ${g.other} other` : ''}${g.kids ? ` · ${g.kids} kids` : ''}</span></a>
+    <a class="card stat" href="#seating"><small>Seated</small><b>${g.seated}<em> / ${g.need}</em></b><span>${used} of ${S.tables.length} tables in use</span></a>
+    <a class="card stat" href="#budget"><small>${esc(p.name)} · projected cost</small><b>${rs(t.proj)}</b><span>${rs(t.income)} income · <span class="${t.bal >= 0 ? 'pos' : 'neg'}">${t.bal >= 0 ? rs(t.bal) + ' spare' : rs(-t.bal) + ' short'}</span></span></a>
+    <a class="card stat" href="#budget"><small>Paid so far</small><b>${rs(t.paid)}</b><span>${rs(t.left)} still to pay</span></a>
+    <a class="card stat" href="#vendors"><small>Vendors booked</small><b>${booked}<em> / ${S.vendors.length}</em></b><span>${S.vendors.filter(v => v.status === 'Shortlisted').length} shortlisted</span></a>
+  </div>
+  ${empty ? `<div class="card" style="margin-bottom:12px"><h3>Start with your spreadsheet</h3><p class="hint" style="margin:0 0 10px">Your guest lists, budget and vendors are ready in <b>seed-data.json</b>. Import it once and everything fills in.</p><label class="btn pri" style="display:inline-block">Import seed-data.json<input type="file" accept="application/json,.json" hidden id="importFile"></label></div>` : ''}
+  <div class="two">
+    <div class="card"><h3>Wedding details</h3>
+      <div class="field"><label>Bride</label><input class="cell" ${attrs('couple', 'x', 'a')} value="${esc(S.couple.a)}"></div>
+      <div class="field"><label>Groom</label><input class="cell" ${attrs('couple', 'x', 'b')} value="${esc(S.couple.b)}"></div>
+      <div class="field"><label>Wedding date</label><input class="cell" type="date" ${attrs('couple', 'x', 'date')} value="${esc(S.couple.date)}"></div>
+    </div>
+    <div class="card"><h3>Your data</h3>
+      <p class="hint" style="margin-top:0">${API_URL ? 'Synced to your Google Sheet. Anyone with the PIN can edit.' : 'Not connected to Google Sheets yet — changes stay on this device. Add your Apps Script URL in index.html.'}</p>
+      <div class="row" style="margin-top:12px">
+        <button class="btn" data-act="export">Download backup</button>
+        <label class="btn">Import backup<input type="file" accept="application/json,.json" hidden id="importFile2"></label>
+        ${API_URL ? '<button class="btn ghost" data-act="forget-pin">Forget PIN</button>' : ''}
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ----- guests ----- */
+const gf = { q: '', side: 'all', rel: 'all' }, gsort = { k: null, dir: 1 };
+function filteredGuests() {
+  const q = gf.q.trim().toLowerCase();
+  let list = S.guests.filter(g => (gf.side === 'all' || g.side === gf.side) && (gf.rel === 'all' || g.rel === gf.rel) && (!q || (g.name + ' ' + g.notes + ' ' + g.rel).toLowerCase().includes(q)));
+  if (gsort.k) {
+    const tl = id => (S.tables.find(t => t.id === id) || { label: '~' }).label;
+    const val = g => gsort.k === 'table' ? tl(g.table) : gsort.k === 'count' ? n(g.count) : String(g[gsort.k] || '').toLowerCase();
+    list = [...list].sort((a, b) => (val(a) > val(b) ? 1 : val(a) < val(b) ? -1 : 0) * gsort.dir);
+  }
+  return list;
+}
+function guestRow(g) {
+  return `<tr>
+    <td><input class="cell" ${attrs('guest', g.id, 'name')} value="${esc(g.name)}" placeholder="Name"></td>
+    <td class="w90"><select class="cell s-${g.side}" ${attrs('guest', g.id, 'side')}>${opt(SIDES, g.side)}</select></td>
+    <td class="w120"><input class="cell" list="rels" ${attrs('guest', g.id, 'rel')} value="${esc(g.rel)}"></td>
+    <td class="w70"><input class="cell num" type="number" min="0" ${attrs('guest', g.id, 'count')} value="${n(g.count)}"></td>
+    <td class="w70"><input class="cell num" type="number" min="0" ${attrs('guest', g.id, 'kids')} value="${n(g.kids)}"></td>
+    <td class="w70"><input class="cell num" type="number" min="0" step="0.5" ${attrs('guest', g.id, 'liquor')} value="${n(g.liquor)}"></td>
+    <td class="c w40"><input type="checkbox" ${attrs('guest', g.id, 'sent')} ${g.sent ? 'checked' : ''}></td>
+    <td class="w90"><select class="cell" ${attrs('guest', g.id, 'rsvp')}>${opt(RSVPS, g.rsvp || '')}</select></td>
+    <td class="w120"><select class="cell" ${attrs('guest', g.id, 'table')}>${opt([['', '—']].concat(S.tables.map(t => [t.id, t.label])), g.table || '')}</select></td>
+    <td><input class="cell" ${attrs('guest', g.id, 'notes')} value="${esc(g.notes)}" placeholder="Notes"></td>
+    <td class="w40"><button class="x" data-act="del-guest" data-id="${g.id}" aria-label="Remove guest">×</button></td></tr>`;
+}
+function guestRows() {
+  const l = filteredGuests();
+  return l.length ? l.map(guestRow).join('') : `<tr class="empty-row"><td colspan="11">No guests here yet.</td></tr>`;
+}
+function guestPills() {
+  const s = guestStats();
+  return `<span class="pill"><b>${s.total}</b> guests</span><span class="pill"><b>${s.isuru}</b> Isuru's side</span><span class="pill"><b>${s.ishini}</b> Ishini's side</span>${s.other ? `<span class="pill"><b>${s.other}</b> other</span>` : ''}<span class="pill"><b>${s.kids}</b> kids</span><span class="pill"><b>${s.liquor}</b> liquor</span><span class="pill"><b>${s.sent}</b>/${s.entries} invited</span><span class="pill"><b>${s.yes}</b> confirmed</span>`;
+}
+function vGuests() {
+  const rels = [...new Set(S.guests.map(g => g.rel).filter(Boolean))].sort();
+  const th = (k, l) => `<th data-sort="${k}">${l}${gsort.k === k ? (gsort.dir > 0 ? ' ↑' : ' ↓') : ''}</th>`;
+  return `<div class="head"><div><h2>Guest list</h2><p class="sub">Add everyone, tag their side, and track invitations.</p></div>
+    <button class="btn pri" data-act="add-guest">+ Add guest</button></div>
+  <div class="pills" id="gpills">${guestPills()}</div>
+  <div class="bar-row">
+    <input class="search" id="gq" placeholder="Search guests…" value="${esc(gf.q)}">
+    <div class="seg" id="gside">${[['all', 'All'], ['isuru', 'Isuru'], ['ishini', 'Ishini'], ['other', 'Other']].map(([k, l]) => `<button data-side="${k}" class="${gf.side === k ? 'on' : ''}">${l}</button>`).join('')}</div>
+    <select class="search" id="grel"><option value="all">All groups</option>${rels.map(r => `<option${gf.rel === r ? ' selected' : ''}>${esc(r)}</option>`).join('')}</select>
+  </div>
+  <div class="tbl-wrap"><table class="grid wide"><thead><tr>${th('name', 'Name')}${th('side', 'Side')}${th('rel', 'Group')}${th('count', 'Guests')}<th>Kids</th><th>Liquor</th><th>Sent</th><th>RSVP</th>${th('table', 'Table')}<th>Notes</th><th></th></tr></thead>
+  <tbody id="gbody">${guestRows()}</tbody></table></div>
+  <p class="hint">“Guests” is the number of adults in that invitation. Kids are counted separately; both take a seat.</p>`;
+}
+const refreshGuests = () => { if (tab === 'guests') { $('#gbody').innerHTML = guestRows(); $('#gpills').innerHTML = guestPills(); } };
+
+/* ----- seating ----- */
+let sel = null, poolQ = '', poolSide = 'all', dragId = null;
+const chip = (g, inTable) => {
+  const s = seats(g);
+  return `<div class="chip ${g.side}${sel === g.id ? ' sel' : ''}" draggable="true" data-gid="${g.id}" title="${esc(g.name)}${s !== 1 ? ' · ' + s + ' seats' : ''}"><span class="nm">${esc(g.name || '(unnamed)')}</span>${s !== 1 ? `<span class="n">${s}</span>` : ''}${inTable ? `<button class="un" data-act="unseat" data-gid="${g.id}" aria-label="Remove from table">×</button>` : ''}</div>`;
+};
+function tableSvg(t, gs, used) {
+  const cap = Math.max(1, Math.min(40, n(t.cap) || 1)), cols = [];
+  gs.forEach(g => { for (let k = 0; k < seats(g); k++) cols.push(g.side); });
+  const R = 68, sr = Math.max(4.5, Math.min(11, Math.PI * R / cap * 0.8));
+  let s = '';
+  for (let i = 0; i < cap; i++) {
+    const a = 2 * Math.PI * i / cap - Math.PI / 2;
+    s += `<circle cx="${(100 + R * Math.cos(a)).toFixed(1)}" cy="${(100 + R * Math.sin(a)).toFixed(1)}" r="${sr.toFixed(1)}" class="seat ${cols[i] || 'free'}"/>`;
+  }
+  return `<svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="44" class="top"/>${s}<text x="100" y="109" text-anchor="middle" class="tt">${used}/${cap}</text></svg>`;
+}
+function tableCard(t) {
+  const gs = S.guests.filter(g => g.table === t.id), used = gs.reduce((a, g) => a + seats(g), 0);
+  return `<div class="tbl${used > n(t.cap) ? ' over-cap' : ''}" data-drop="table" data-id="${t.id}">
+    <div class="tbl-head"><input class="cell tname" ${attrs('table', t.id, 'label')} value="${esc(t.label)}"><button class="x" data-act="del-table" data-id="${t.id}" aria-label="Remove table">×</button></div>
+    ${tableSvg(t, gs, used)}
+    <div class="chips">${gs.map(g => chip(g, true)).join('') || '<div class="empty">Drop guests here</div>'}</div>
+    <div class="tbl-foot"><span>Seats</span><input class="cell cap num" type="number" min="1" max="40" ${attrs('table', t.id, 'cap')} value="${n(t.cap)}"></div></div>`;
+}
+function poolList() {
+  const q = poolQ.trim().toLowerCase();
+  return S.guests.filter(g => !g.table && (poolSide === 'all' || g.side === poolSide) && (!q || g.name.toLowerCase().includes(q))).map(g => chip(g, false)).join('') || '<div class="empty">Everyone is seated 🎉</div>';
+}
+function vSeating() {
+  return `<div class="head"><div><h2>Seating</h2><p class="sub">Drag a name onto a table — or tap a name, then tap a table.</p></div>
+    <div class="row"><div class="legend"><span><i style="background:var(--isuru)"></i>Isuru</span><span><i style="background:var(--ishini)"></i>Ishini</span><span><i style="background:var(--other)"></i>Other</span></div>
+    <button class="btn" data-act="clear-seating">Clear seating</button><button class="btn pri" data-act="add-table">+ Add table</button></div></div>
+  <div class="seat-layout" id="seatLayout">
+    <aside class="card pool" data-drop="pool">
+      <div class="pool-h"><b>Unseated</b><span id="poolCount"></span></div>
+      <input class="search" id="pq" placeholder="Search…" value="${esc(poolQ)}">
+      <div class="seg" id="pside">${[['all', 'All'], ['isuru', 'Isuru'], ['ishini', 'Ishini'], ['other', 'Other']].map(([k, l]) => `<button data-side="${k}" class="${poolSide === k ? 'on' : ''}">${l}</button>`).join('')}</div>
+      <div class="pool-list" id="poolList"></div>
+    </aside>
+    <section class="tables" id="tables"></section>
+  </div>`;
+}
+function refreshSeating() {
+  if (tab !== 'seating') return;
+  $('#tables').innerHTML = S.tables.map(tableCard).join('') || '<div class="empty">No tables yet — add one.</div>';
+  $('#poolList').innerHTML = poolList();
+  const un = S.guests.filter(g => !g.table);
+  $('#poolCount').textContent = `${un.length} · ${un.reduce((a, g) => a + seats(g), 0)} seats`;
+  $('#seatLayout').classList.toggle('picking', !!sel);
+}
+function assign(gid, tid) {
+  const g = S.guests.find(x => x.id === gid); if (!g) return;
+  g.table = tid || null; sel = null; touchSave(); refreshSeating();
+  if (tid) {
+    const t = S.tables.find(x => x.id === tid), used = S.guests.filter(x => x.table === tid).reduce((a, x) => a + seats(x), 0);
+    if (used > n(t.cap)) toast(`${t.label} is over capacity (${used}/${n(t.cap)})`);
+  }
+}
+
+/* ----- budget ----- */
+function catCard(c) {
+  const open = openCats.has(c.id);
+  return `<div class="card cat${open ? ' open' : ''}" data-cid="${c.id}">
+    <div class="cat-h" data-act="toggle-cat" data-id="${c.id}">
+      <span class="chev">▶</span>
+      <input class="cell cname" ${attrs('cat', c.id, 'name')} value="${esc(c.name)}">
+      <div class="cv hide-s"><small>Estimate</small><span data-csum="${c.id}:est"></span></div>
+      <div class="cv hide-s"><small>Actual</small><span data-csum="${c.id}:act"></span></div>
+      <div class="cv"><small>Paid</small><span data-csum="${c.id}:paid"></span></div>
+    </div>
+    <div class="cat-bar"><i data-cbar="${c.id}" style="width:0"></i></div>
+    <div class="cat-b">
+      <table class="grid"><thead><tr><th>Item</th><th class="num">Estimate</th><th class="num">Actual</th><th class="num">Paid</th><th>Note</th><th></th></tr></thead><tbody>
+      ${c.items.map(i => `<tr>
+        <td><input class="cell" ${attrs('item', i.id, 'name')} value="${esc(i.name)}" placeholder="Item"></td>
+        <td class="w120"><input class="cell num money" inputmode="decimal" ${attrs('item', i.id, 'est')} value="${fmt(i.est)}"></td>
+        <td class="w120"><input class="cell num money" inputmode="decimal" ${attrs('item', i.id, 'actual')} value="${fmt(i.actual)}"></td>
+        <td class="w120"><input class="cell num money" inputmode="decimal" ${attrs('item', i.id, 'paid')} value="${fmt(i.paid)}"></td>
+        <td><input class="cell" ${attrs('item', i.id, 'note')} value="${esc(i.note)}" placeholder="Note"></td>
+        <td class="w40"><button class="x" data-act="del-item" data-id="${i.id}" aria-label="Remove item">×</button></td></tr>`).join('')}
+      </tbody></table>
+      <div class="foot"><button class="btn sm" data-act="add-item" data-id="${c.id}">+ Add item</button><button class="btn sm ghost" data-act="del-cat" data-id="${c.id}">Delete category</button></div>
+    </div></div>`;
+}
+function vBudget() {
+  const p = plan();
+  const cmp = S.plans.length > 1 ? `<div class="card" style="margin-top:14px"><h3>Compare plans</h3><table class="compare"><thead><tr><th>Plan</th><th>Income</th><th>Estimated</th><th>Projected</th><th>Balance</th></tr></thead><tbody>${S.plans.map(x => { const t = planTotals(x); return `<tr><td>${esc(x.name)}</td><td>${rs(t.income)}</td><td>${rs(t.est)}</td><td>${rs(t.proj)}</td><td class="${t.bal >= 0 ? 'pos' : 'neg'}">${rs(t.bal)}</td></tr>`; }).join('')}</tbody></table></div>` : '';
+  return `<div class="head"><div><h2>Budget</h2><p class="sub">Estimate first, add the actual price when you know it, and track what you’ve paid. Projected = actual if entered, otherwise estimate.</p></div></div>
+  <div class="plans">${S.plans.map(x => `<button class="pbtn${x.id === p.id ? ' on' : ''}" data-act="plan" data-id="${x.id}">${esc(x.name)}</button>`).join('')}
+    <button class="btn sm" data-act="new-plan">+ New plan</button><button class="btn sm" data-act="dup-plan">Duplicate</button>${S.plans.length > 1 ? '<button class="btn sm ghost" data-act="del-plan">Delete plan</button>' : ''}</div>
+  <div class="field" style="max-width:360px"><label>Plan name</label><input class="cell" ${attrs('plan', p.id, 'name')} value="${esc(p.name)}"></div>
+  <div class="stats">
+    <div class="card stat"><small>Income</small><b data-sum="income"></b></div>
+    <div class="card stat"><small>Estimated</small><b data-sum="est"></b></div>
+    <div class="card stat"><small>Actual (entered)</small><b data-sum="act"></b></div>
+    <div class="card stat"><small>Paid</small><b data-sum="paid"></b></div>
+    <div class="card stat"><small>Left to pay</small><b data-sum="left"></b></div>
+    <div class="card stat"><small>Balance (income − projected)</small><b data-sum="bal"></b></div>
+  </div>
+  <div class="card"><h3>Income</h3>
+    <table class="grid"><tbody>${p.income.map(x => `<tr><td><input class="cell" ${attrs('income', x.id, 'label')} value="${esc(x.label)}" placeholder="Source"></td>
+      <td class="w120"><input class="cell num money" inputmode="decimal" ${attrs('income', x.id, 'amount')} value="${fmt(x.amount)}"></td>
+      <td class="w40"><button class="x" data-act="del-income" data-id="${x.id}" aria-label="Remove">×</button></td></tr>`).join('')}</tbody></table>
+    <button class="btn sm" style="margin-top:8px" data-act="add-income">+ Add income</button></div>
+  <h3 style="font:500 22px var(--serif);margin:22px 0 0">Categories</h3>
+  ${p.cats.map(catCard).join('')}
+  <div style="margin-top:12px"><button class="btn" data-act="add-cat">+ Add category</button></div>
+  ${cmp}`;
+}
+function refreshBudget() {
+  if (tab !== 'budget') return;
+  const p = plan(), t = planTotals(p);
+  $$('[data-sum]').forEach(el => { const k = el.dataset.sum; el.textContent = rs(t[k]); if (k === 'bal') el.className = t.bal >= 0 ? 'pos' : 'neg'; });
+  p.cats.forEach(c => {
+    const x = catTotals(c), map = { est: x.est, act: x.act, paid: x.paid };
+    $$(`[data-csum^="${c.id}:"]`).forEach(el => { el.textContent = map[el.dataset.csum.split(':')[1]] ? rs(map[el.dataset.csum.split(':')[1]]) : '–'; });
+    const bar = $(`[data-cbar="${c.id}"]`); if (bar) bar.style.width = (x.proj > 0 ? Math.min(100, x.paid / x.proj * 100) : 0) + '%';
+  });
+}
+
+/* ----- vendors ----- */
+const vf = { q: '', cat: 'all' };
+function filteredVendors() {
+  const q = vf.q.trim().toLowerCase();
+  return S.vendors.filter(v => (vf.cat === 'all' || v.cat === vf.cat) && (!q || (v.name + ' ' + v.notes + ' ' + v.cat).toLowerCase().includes(q)));
+}
+function vendorRow(v) {
+  const link = /^https?:\/\//i.test(v.link || '') ? `<a class="ext" href="${esc(v.link)}" target="_blank" rel="noopener" title="Open link">↗</a>` : '';
+  return `<tr>
+    <td class="w120"><input class="cell" list="vcats" ${attrs('vendor', v.id, 'cat')} value="${esc(v.cat)}"></td>
+    <td><input class="cell" ${attrs('vendor', v.id, 'name')} value="${esc(v.name)}" placeholder="Vendor name"></td>
+    <td class="w120"><select class="cell st-${slug(v.status)}" ${attrs('vendor', v.id, 'status')}>${opt(STATUSES.map(s => [s, s]), v.status)}</select></td>
+    <td class="w120"><input class="cell num money" inputmode="decimal" ${attrs('vendor', v.id, 'quote')} value="${fmt(v.quote)}" placeholder="Quote"></td>
+    <td class="w120"><input class="cell" ${attrs('vendor', v.id, 'phone')} value="${esc(v.phone)}" placeholder="Phone"></td>
+    <td style="min-width:150px"><div class="row" style="flex-wrap:nowrap;gap:0"><input class="cell" ${attrs('vendor', v.id, 'link')} value="${esc(v.link)}" placeholder="Link / social">${link}</div></td>
+    <td style="min-width:200px"><input class="cell" ${attrs('vendor', v.id, 'notes')} value="${esc(v.notes)}" placeholder="Notes"></td>
+    <td class="w40"><button class="x" data-act="del-vendor" data-id="${v.id}" aria-label="Remove vendor">×</button></td></tr>`;
+}
+function vendorRows() { const l = filteredVendors(); return l.length ? l.map(vendorRow).join('') : `<tr class="empty-row"><td colspan="8">No vendors here yet.</td></tr>`; }
+function vendorPills() {
+  const b = S.vendors.filter(v => v.status === 'Booked');
+  return `<span class="pill"><b>${S.vendors.length}</b> vendors</span><span class="pill"><b>${b.length}</b> booked</span><span class="pill"><b>${S.vendors.filter(v => v.status === 'Shortlisted').length}</b> shortlisted</span><span class="pill">Booked total <b>${rs(b.reduce((a, v) => a + n(v.quote), 0))}</b></span>`;
+}
+function vendorCats() {
+  const cats = [...new Set(S.vendors.map(v => v.cat).filter(Boolean))];
+  return [['all', `All (${S.vendors.length})`]].concat(cats.map(c => [c, `${c} (${S.vendors.filter(v => v.cat === c).length})`]));
+}
+function vVendors() {
+  return `<div class="head"><div><h2>Vendors</h2><p class="sub">Compare quotes, track who you’ve contacted, and mark who’s booked.</p></div>
+    <button class="btn pri" data-act="add-vendor">+ Add vendor</button></div>
+  <div class="pills" id="vpills">${vendorPills()}</div>
+  <div class="bar-row"><input class="search" id="vq" placeholder="Search vendors…" value="${esc(vf.q)}"><div class="seg" id="vcatseg">${vendorCats().map(([k, l]) => `<button data-cat="${esc(k)}" class="${vf.cat === k ? 'on' : ''}">${esc(l)}</button>`).join('')}</div></div>
+  <datalist id="vcats">${[...new Set(S.vendors.map(v => v.cat).filter(Boolean))].map(c => `<option>${esc(c)}</option>`).join('')}</datalist>
+  <div class="tbl-wrap"><table class="grid wide"><thead><tr><th>Category</th><th>Name</th><th>Status</th><th class="num">Quote (Rs)</th><th>Phone</th><th>Link</th><th>Notes</th><th></th></tr></thead><tbody id="vbody">${vendorRows()}</tbody></table></div>`;
+}
+const refreshVendors = () => { if (tab === 'vendors') { $('#vbody').innerHTML = vendorRows(); $('#vpills').innerHTML = vendorPills(); } };
+
+/* ---------- editing (one delegate for every field) ---------- */
+function rec(coll, id) {
+  const p = plan();
+  switch (coll) {
+    case 'couple': return S.couple;
+    case 'guest': return S.guests.find(x => x.id === id);
+    case 'vendor': return S.vendors.find(x => x.id === id);
+    case 'table': return S.tables.find(x => x.id === id);
+    case 'plan': return S.plans.find(x => x.id === id);
+    case 'income': return p.income.find(x => x.id === id);
+    case 'cat': return p.cats.find(x => x.id === id);
+    case 'item': for (const c of p.cats) { const i = c.items.find(x => x.id === id); if (i) return i; }
+  }
+}
+document.addEventListener('input', e => {
+  const t = e.target, d = t.dataset; if (!d || !d.coll) return;
+  const r = rec(d.coll, d.id); if (!r) return;
+  let v = t.type === 'checkbox' ? t.checked : (t.classList.contains('money') || t.type === 'number') ? n(t.value) : t.value;
+  if (d.k === 'table' && v === '') v = null;
+  r[d.k] = v; touchSave();
+  if (d.coll === 'couple') renderHero();
+  if (d.coll === 'guest') { if (d.k === 'side') t.className = 'cell s-' + v; $('#gpills').innerHTML = guestPills(); }
+  if (d.coll === 'vendor') { if (d.k === 'status') t.className = 'cell st-' + slug(v); $('#vpills').innerHTML = vendorPills(); }
+  if (['income', 'item', 'cat'].includes(d.coll)) refreshBudget();
+});
+document.addEventListener('change', e => {
+  const d = e.target.dataset;
+  if (d && d.coll === 'table' && d.k === 'cap' && tab === 'seating') refreshSeating();
+  if (d && d.coll === 'plan' && tab === 'budget') render();
+  if (d && d.coll === 'vendor' && d.k === 'cat') { refreshVendors(); $('#vcatseg').innerHTML = vendorCats().map(([k, l]) => `<button data-cat="${esc(k)}" class="${vf.cat === k ? 'on' : ''}">${esc(l)}</button>`).join(''); }
+});
+document.addEventListener('focusin', e => { if (e.target.classList && e.target.classList.contains('money')) e.target.value = n(e.target.value) || ''; });
+document.addEventListener('focusout', e => { if (e.target.classList && e.target.classList.contains('money')) e.target.value = fmt(e.target.value); });
+
+/* search / filters */
+document.addEventListener('input', e => {
+  const id = e.target.id;
+  if (id === 'gq') { gf.q = e.target.value; $('#gbody').innerHTML = guestRows(); }
+  if (id === 'vq') { vf.q = e.target.value; $('#vbody').innerHTML = vendorRows(); }
+  if (id === 'pq') { poolQ = e.target.value; $('#poolList').innerHTML = poolList(); }
+});
+document.addEventListener('change', e => {
+  if (e.target.id === 'grel') { gf.rel = e.target.value; $('#gbody').innerHTML = guestRows(); }
+  if (e.target.id === 'importFile' || e.target.id === 'importFile2') importFile(e.target.files[0]);
+});
+
+/* ---------- actions ---------- */
+function addItemTo(cid) { const c = plan().cats.find(x => x.id === cid); const i = { id: uid('i'), name: '', est: 0, actual: 0, paid: 0, note: '' }; c.items.push(i); openCats.add(cid); touchSave(); render(); const el = $(`[data-id="${i.id}"][data-k="name"]`); el && el.focus(); }
+function dupPlan(p, name) {
+  const cp = JSON.parse(JSON.stringify(p)); cp.id = uid('p'); cp.name = name;
+  cp.income.forEach(x => x.id = uid('n')); cp.cats.forEach(c => { c.id = uid('c'); c.items.forEach(i => i.id = uid('i')); });
+  return cp;
+}
+function act(a, b) {
+  const id = b.dataset.id, p = plan();
+  switch (a) {
+    case 'add-guest': {
+      const g = { id: uid('g'), name: '', side: ['isuru', 'ishini', 'other'].includes(gf.side) ? gf.side : 'isuru', rel: gf.rel !== 'all' ? gf.rel : 'Friends', count: 1, liquor: 0, kids: 0, sent: false, rsvp: '', table: null, notes: '' };
+      S.guests.unshift(g); gf.q = ''; $('#gq').value = ''; touchSave(); refreshGuests();
+      const el = $(`[data-id="${g.id}"][data-k="name"]`); el && el.focus(); break;
     }
-
-    function updateAllViews() {
-        renderList('Budget'); 
-        renderList('Guests'); 
-        renderList('Vendors');
-        updateDashboard();
-        renderSeating();
+    case 'del-guest': removeFrom(S.guests, id, refreshGuests); break;
+    case 'add-table': { const t = { id: uid('t'), label: 'Table ' + (S.tables.length + 1), cap: 10 }; S.tables.push(t); touchSave(); refreshSeating(); break; }
+    case 'del-table': {
+      const on = S.guests.filter(g => g.table === id);
+      if (on.length && !confirm(`Remove this table? Its ${on.length} guest entr${on.length > 1 ? 'ies' : 'y'} will go back to Unseated.`)) break;
+      on.forEach(g => g.table = null); removeFrom(S.tables, id, refreshSeating); break;
     }
-
-    function updateDashboard() {
-        let totalGuests = appData.Guests.reduce((sum, g) => sum + Number(g.raw.partySize || 0), 0);
-        let totalBudget = appData.Budget.reduce((sum, b) => sum + Number(b.raw.cost || 0), 0);
-        let totalPaid = appData.Vendors.reduce((sum, v) => sum + Number(v.raw.amountPaid || 0), 0);
-        
-        document.getElementById('dashGuests').innerText = totalGuests;
-        document.getElementById('dashBudget').innerText = totalBudget.toLocaleString();
-        document.getElementById('dashPaid').innerText = totalPaid.toLocaleString();
+    case 'clear-seating': if (confirm('Move every guest back to Unseated?')) { S.guests.forEach(g => g.table = null); touchSave(); refreshSeating(); } break;
+    case 'unseat': assign(b.dataset.gid, null); break;
+    case 'plan': S.activePlan = id; touchSave(); render(); break;
+    case 'new-plan': { const np = blankPlan('Plan ' + String.fromCharCode(65 + S.plans.length)); S.plans.push(np); S.activePlan = np.id; touchSave(); render(); break; }
+    case 'dup-plan': { const np = dupPlan(p, p.name + ' copy'); S.plans.push(np); S.activePlan = np.id; touchSave(); render(); toast('Duplicated — edit the copy freely'); break; }
+    case 'del-plan': if (S.plans.length > 1 && confirm(`Delete "${p.name}"?`)) { S.plans = S.plans.filter(x => x.id !== p.id); S.activePlan = S.plans[0].id; touchSave(); render(); } break;
+    case 'add-cat': { const c = { id: uid('c'), name: 'New category', open: true, items: [] }; p.cats.push(c); openCats.add(c.id); touchSave(); render(); const el = $(`[data-id="${c.id}"][data-k="name"]`); el && (el.focus(), el.select()); break; }
+    case 'del-cat': { const c = p.cats.find(x => x.id === id); if (!c.items.length || confirm(`Delete "${c.name}" and its ${c.items.length} item(s)?`)) removeFrom(p.cats, id, render); break; }
+    case 'toggle-cat': { openCats.has(id) ? openCats.delete(id) : openCats.add(id); b.closest('.cat').classList.toggle('open'); break; }
+    case 'add-item': addItemTo(id); break;
+    case 'del-item': for (const c of p.cats) { if (c.items.some(i => i.id === id)) { removeFrom(c.items, id, () => { render(); }); break; } } break;
+    case 'add-income': p.income.push({ id: uid('n'), label: '', amount: 0 }); touchSave(); render(); break;
+    case 'del-income': removeFrom(p.income, id, render); break;
+    case 'add-vendor': {
+      const v = { id: uid('v'), cat: vf.cat !== 'all' ? vf.cat : '', name: '', phone: '', link: '', status: 'To contact', quote: 0, notes: '' };
+      S.vendors.unshift(v); vf.q = ''; $('#vq').value = ''; touchSave(); refreshVendors();
+      const el = $(`[data-id="${v.id}"][data-k="name"]`); el && el.focus(); break;
     }
-
-    // --- SINGLE ADD/EDIT ---
-    async function submitData(type) {
-        const btn = document.getElementById(type.toLowerCase() === 'guests' ? 'guestBtn' : type.toLowerCase().replace('s','') + 'Btn');
-        const idField = document.getElementById(type.toLowerCase() === 'guests' ? 'guestId' : type.toLowerCase().replace('s','') + 'Id');
-        
-        let payload = { type: type, id: idField.value };
-        let localItem = { id: payload.id || Date.now().toString() };
-
-        if(type === 'Budget') {
-            payload.category = document.getElementById('budgetCategory').value;
-            payload.item = document.getElementById('budgetItem').value;
-            payload.cost = document.getElementById('budgetCost').value;
-            localItem.title = payload.item; localItem.desc = `${payload.category} | LKR ${payload.cost}`;
-        } else if(type === 'Guests') {
-            payload.name = document.getElementById('guestName').value;
-            payload.side = document.getElementById('guestSide').value;
-            payload.partySize = document.getElementById('guestCount').value;
-            // Preserve existing table if editing, else Unassigned
-            const existingGuest = appData.Guests.find(g => g.id === payload.id);
-            payload.table = existingGuest ? existingGuest.raw.table : "Unassigned";
-            localItem.title = payload.name; localItem.desc = `${payload.side}'s Side | Party of ${payload.partySize}`;
-        } else if(type === 'Vendors') {
-            payload.service = document.getElementById('vendorService').value;
-            payload.vendorName = document.getElementById('vendorName').value;
-            payload.totalCost = document.getElementById('vendorTotal').value;
-            payload.amountPaid = document.getElementById('vendorPaid').value;
-            localItem.title = payload.vendorName; localItem.desc = `${payload.service} | Total: LKR ${payload.totalCost} | Paid: LKR ${payload.amountPaid}`;
-        }
-        
-        localItem.raw = payload;
-
-        if (idField.value) {
-            const index = appData[type].findIndex(i => i.id === payload.id);
-            if(index > -1) appData[type][index] = localItem;
-        } else {
-            payload.id = localItem.id;
-            appData[type].push(localItem);
-        }
-        
-        updateAllViews(); 
-        resetForm(type);
-
-        try {
-            btn.innerText = "Saving...";
-            await fetch(WEB_APP_URL, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'text/plain;charset=utf-8' } });
-            btn.innerText = `Saved ✓`;
-            setTimeout(() => btn.innerText = `Add`, 2000);
-        } catch (error) { btn.innerText = `Error Saving`; }
+    case 'del-vendor': removeFrom(S.vendors, id, () => { refreshVendors(); }); break;
+    case 'export': {
+      const a2 = document.createElement('a'); a2.href = URL.createObjectURL(new Blob([JSON.stringify(S, null, 1)], { type: 'application/json' }));
+      a2.download = `wedding-backup-${new Date().toISOString().slice(0, 10)}.json`; a2.click(); break;
     }
+    case 'forget-pin': setPin(''); toast('PIN forgotten on this device'); break;
+    case 'take-theirs': conflict = false; dirty = false; $('#banner').innerHTML = ''; loadRemote().then(render).catch(() => toast('Could not reach the server')); break;
+    case 'keep-mine': conflict = false; $('#banner').innerHTML = ''; flush(true); break;
+  }
+}
+async function importFile(f) {
+  if (!f) return;
+  try {
+    const obj = JSON.parse(await f.text());
+    if (!obj || !Array.isArray(obj.guests) || !Array.isArray(obj.plans)) throw new Error('bad file');
+    if ((S.guests.length || S.vendors.length) && !confirm('This replaces everything currently in the planner. Continue?')) return;
+    S = normalise(obj); touchSave(); render(); toast('Imported ✓');
+  } catch (e) { toast('That file doesn’t look like a planner backup'); }
+}
 
-    function renderList(type) {
-        const listDiv = document.getElementById(type.toLowerCase() + 'List');
-        if(!listDiv) return;
-        listDiv.innerHTML = '';
-        // Render in reverse so newest is on top
-        [...appData[type]].reverse().forEach(item => {
-            listDiv.innerHTML += `
-                <div class="list-item">
-                    <div><h4>${item.title}</h4><p>${item.desc}</p></div>
-                    <button class="edit-btn" onclick='editItem("${type}", ${JSON.stringify(item)})'>Edit</button>
-                </div>`;
-        });
+/* ---------- global clicks, drag & drop ---------- */
+document.addEventListener('click', e => {
+  const t = e.target;
+  if (t.closest('[data-top]')) { scrollTo({ top: 0, behavior: 'smooth' }); return; }
+  const anchor = t.closest('a[href^="#"]');
+  if (anchor && (location.hash || '#overview') === anchor.getAttribute('href')) scrollToMain();   // same tab again: still scroll down
+  if (t.closest('.cat-h') && t.tagName === 'INPUT') return;                 // editing a category name shouldn't collapse it
+  const b = t.closest('[data-act]');
+  if (b) { act(b.dataset.act, b); return; }
+  const sideBtn = t.closest('#gside [data-side]');
+  if (sideBtn) { gf.side = sideBtn.dataset.side; $$('#gside button').forEach(x => x.classList.toggle('on', x === sideBtn)); $('#gbody').innerHTML = guestRows(); return; }
+  const pBtn = t.closest('#pside [data-side]');
+  if (pBtn) { poolSide = pBtn.dataset.side; $$('#pside button').forEach(x => x.classList.toggle('on', x === pBtn)); $('#poolList').innerHTML = poolList(); return; }
+  const cBtn = t.closest('#vcatseg [data-cat]');
+  if (cBtn) { vf.cat = cBtn.dataset.cat; $$('#vcatseg button').forEach(x => x.classList.toggle('on', x === cBtn)); $('#vbody').innerHTML = vendorRows(); return; }
+  const th = t.closest('th[data-sort]');
+  if (th) { const k = th.dataset.sort; gsort.dir = gsort.k === k ? -gsort.dir : 1; gsort.k = k; render(); return; }
+  if (tab === 'seating') {                                                   // tap to pick, tap to place
+    const c = t.closest('.chip');
+    if (c) { sel = sel === c.dataset.gid ? null : c.dataset.gid; refreshSeating(); if (sel) toast('Now tap a table to seat them'); return; }
+    if (sel && !/^(INPUT|BUTTON)$/.test(t.tagName)) {
+      const tb = t.closest('[data-drop]'); if (tb) assign(sel, tb.dataset.drop === 'table' ? tb.dataset.id : null);
     }
+  }
+});
+document.addEventListener('dragstart', e => {
+  const c = e.target.closest && e.target.closest('.chip'); if (!c) return;
+  dragId = c.dataset.gid; e.dataTransfer.setData('text/plain', dragId); e.dataTransfer.effectAllowed = 'move';
+  setTimeout(() => c.classList.add('drag'), 0);
+});
+document.addEventListener('dragend', () => { dragId = null; $$('.drag,.over').forEach(x => x.classList.remove('drag', 'over')); });
+document.addEventListener('dragover', e => {
+  if (!dragId) return;
+  const d = e.target.closest && e.target.closest('[data-drop]');
+  $$('.over').forEach(x => x !== d && x.classList.remove('over'));
+  if (d) { e.preventDefault(); d.classList.add('over'); }
+});
+document.addEventListener('drop', e => {
+  if (!dragId) return;
+  const d = e.target.closest && e.target.closest('[data-drop]'); if (!d) return;
+  e.preventDefault(); const id = dragId; dragId = null;
+  assign(id, d.dataset.drop === 'table' ? d.dataset.id : null);
+});
 
-    function editItem(type, item) {
-        const prefix = type.toLowerCase() === 'guests' ? 'guest' : type.toLowerCase().replace('s','');
-        document.getElementById(prefix + 'Id').value = item.id;
-        document.getElementById(prefix + 'Btn').innerText = `Update`;
+/* ---------- routing & boot ---------- */
+function route() { const h = (location.hash || '#overview').slice(1); tab = TABS.some(t => t[0] === h) ? h : 'overview'; sel = null; render(); }
+const scrollToMain = () => scrollTo({ top: $('#main').getBoundingClientRect().top + scrollY - 84, behavior: reduceMotion ? 'auto' : 'smooth' });
+window.addEventListener('hashchange', () => { route(); scrollToMain(); });
 
-        if(type === 'Budget') {
-            document.getElementById('budgetCategory').value = item.raw.category;
-            document.getElementById('budgetItem').value = item.raw.item;
-            document.getElementById('budgetCost').value = item.raw.cost;
-        } else if(type === 'Guests') {
-            document.getElementById('guestName').value = item.raw.name;
-            document.getElementById('guestSide').value = item.raw.side;
-            document.getElementById('guestCount').value = item.raw.partySize;
-        } else if(type === 'Vendors') {
-            document.getElementById('vendorService').value = item.raw.service;
-            document.getElementById('vendorName').value = item.raw.vendorName;
-            document.getElementById('vendorTotal').value = item.raw.totalCost;
-            document.getElementById('vendorPaid').value = item.raw.amountPaid;
-        }
-        document.querySelector('.glass-panel').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function resetForm(type) {
-        const prefix = type.toLowerCase() === 'guests' ? 'guest' : type.toLowerCase().replace('s','');
-        document.getElementById(prefix + 'Id').value = "";
-        if(type === 'Budget') { document.getElementById('budgetItem').value = ""; document.getElementById('budgetCost').value = ""; }
-        if(type === 'Guests') { document.getElementById('guestName').value = ""; document.getElementById('guestCount').value = "1"; }
-        if(type === 'Vendors') { ['vendorService','vendorName','vendorTotal','vendorPaid'].forEach(id => document.getElementById(id).value = ""); }
-    }
-
-    // --- SEATING DRAG & DROP LOGIC ---
-    function renderSeating() {
-        document.querySelectorAll('.drop-area').forEach(zone => zone.innerHTML = '');
-        
-        appData.Guests.forEach(guest => {
-            const card = document.createElement('div');
-            card.className = 'guest-card';
-            card.draggable = true;
-            card.id = 'guest-' + guest.id;
-            card.ondragstart = drag;
-            card.innerHTML = `${guest.raw.name} <span>(Party of ${guest.raw.partySize})</span>`;
-            
-            let assignedTable = guest.raw.table || 'Unassigned';
-            let targetZone = document.getElementById(assignedTable);
-            
-            if (!targetZone) { targetZone = document.getElementById('Unassigned'); }
-            targetZone.appendChild(card);
-        });
-    }
-
-    function addTable() {
-        tableCount++;
-        const tableId = 'Table_' + tableCount;
-        const tableDiv = document.createElement('div');
-        tableDiv.className = 'wedding-table';
-        tableDiv.innerHTML = `<h4>Table ${tableCount}</h4><div id="${tableId}" class="drop-area" ondragover="allowDrop(event)" ondrop="drop(event)"></div>`;
-        document.getElementById('tablesContainer').appendChild(tableDiv);
-    }
-
-    function allowDrop(event) { event.preventDefault(); }
-    function drag(event) { event.dataTransfer.setData("text", event.target.id); }
-    
-    async function drop(event) {
-        event.preventDefault();
-        const guestCardId = event.dataTransfer.getData("text");
-        const draggedElement = document.getElementById(guestCardId);
-        if(!draggedElement) return;
-
-        let dropZone = event.target;
-        if (!dropZone.classList.contains('drop-area')) {
-            dropZone = dropZone.closest('.wedding-table')?.querySelector('.drop-area');
-        }
-        if(!dropZone) return;
-        
-        // Move element visually
-        dropZone.appendChild(draggedElement);
-
-        // Update local data
-        const guestRealId = guestCardId.replace('guest-', '');
-        const guestIndex = appData.Guests.findIndex(g => g.id == guestRealId);
-        
-        if (guestIndex > -1) {
-            appData.Guests[guestIndex].raw.table = dropZone.id;
-            
-            // Send stealth background update to Google Sheets
-            try {
-                await fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({ action: 'updateSeating', id: guestRealId, table: dropZone.id }),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-                });
-            } catch(e) {
-                console.error("Failed to sync seating update to sheets.", e);
-            }
-        }
-    }
+(async function init() {
+  loadHeroMedia();
+  const cached = readLocal();
+  if (!API_URL) { S = normalise(cached || defaultState()); setStatus('off', 'Saved on this device only'); route(); return; }
+  S = normalise(cached || defaultState());          // show something instantly, then replace with the shared copy
+  route(); setStatus('warn', 'Loading…');
+  try { await loadRemote(); route(); }
+  catch (e) { setStatus('bad', 'Offline — showing this device’s copy'); }
+})();
+})();
 </script>
 </body>
 </html>
